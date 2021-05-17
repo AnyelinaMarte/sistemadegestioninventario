@@ -1,0 +1,72 @@
+.gridLogin{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+}
+.formLogin {
+    width: 100%;
+    margin-top: 70px;
+
+}
+.formLogin label img{
+    padding-top: 10px;
+}
+.formLogin input{
+    border: none;
+    background: white;
+    width: 50%;
+    font-size: 15px;
+
+}
+.formLogin input:placeholder{
+    font-size: 18px;
+
+}
+.formLogin div{
+    margin-bottom: 45px;
+
+}
+/* .containerLogin{
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.247);
+
+} */
+.formLogin div:nth-child(1){
+    margin-top: 30px;
+}
+.formLogin label{
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.247);
+    border-radius: 15px;
+    padding: 15px;
+    width: 300px;
+    background: white;
+
+}
+.formLogin label:hover{
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.377);
+    
+}
+.formLogin button{
+    cursor: pointer;
+    background: linear-gradient(to right,#8929E2, #3C01F1);
+    font-size: 18px;
+    color: white;
+    border-radius: 15px;
+    padding: 15px 25px 15px 25px;
+    border: none;
+    text-transform:uppercase;
+}
+.formLogin a{
+    color: blue;
+    cursor: pointer;
+}
+.svgLogin img{
+    width: auto;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+}
+.userImg{
+    width: 70px;
+    margin-top:18px;
+}
