@@ -6,8 +6,7 @@ import CorreoVerificado from "./CorreoVerificado";
 import Login from "./Login";
 import Menu from "./Components/Menu"
  {/* <Login /> */}
-
-function MyApp({ Component, pageProps }) {
+ function MyApp({ Component, pageProps }) {
   const [userName, setuserName] = useState(null);
   return (
     <>
@@ -16,19 +15,19 @@ function MyApp({ Component, pageProps }) {
       </Head>
       {auth.onAuthStateChanged((user) => {
         setuserName(user);
+       
       })}
       {userName ? (
-        userName.emailVerifed === true ? (
-        <Menu>
+        userName.emailVerified === true ? (
+         <Menu>
           <Component {...pageProps} />
-        </Menu>
+         </Menu>
         ) : (
           <CorreoVerificado />
+         
         )
       ) : (
-        <Menu>
-          <Component {...pageProps} />
-        </Menu>
+        <Login />
       )}
     </>
   );

@@ -4,10 +4,39 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+  }
 
 
 
 * {
   box-sizing: border-box;
+}
+
+/*Container + formularios */
+.container-form{
+  margin-top: 80px;
+  padding: 20px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.219);
+  width: 400px;
+  margin-bottom: 30px;
+}
+.form-añdir h2{
+  color: gray;
+}
+.form-añdir label{
+  color: gray;
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+}
+.form-añdir input{
+  border: none;
+
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.062);
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+.form-añdir input:hover{
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.144);
+
 }

@@ -1,9 +1,13 @@
+import {auth} from '../BD/conf';
+
 export default function CorreoVerificado(){
 
+    const verificar =(e)=>{
+        e.preventDefault()
+        const usuario = auth.currentUser
+        usuario.sendEmailVerification()
+    }    
     return(
-        <div>
-            <h1>Bienvenido a sistema de inventario</h1>
-            <p>Por favor revisa tu correo elctronico para coroborar que se trata de ti</p>
-        </div>
+        <button onClick={verificar}>Confirmar Aqui</button>
     )
 }

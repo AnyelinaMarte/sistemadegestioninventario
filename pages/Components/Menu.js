@@ -22,6 +22,7 @@ import ShowChartIcon from '@material-ui/icons/ShowChart';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 import CategoryIcon from '@material-ui/icons/Category';
+import Link from 'next/link'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -164,7 +165,7 @@ export default function Menu({children}) {
         <List>
           {['Categorias', 'Proveedores'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <CategoryIcon  style={{color:'white', fontSize: 25 }}  /> : <AirportShuttleIcon  style={{color:'white', fontSize: 25 }}  />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <Link href="/Categoria"><a><CategoryIcon  style={{color:'white', fontSize: 25 }}  /> </a></Link>: <AirportShuttleIcon  style={{color:'white', fontSize: 25 }}  />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
