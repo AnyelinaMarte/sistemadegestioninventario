@@ -4,6 +4,9 @@ import Head from "next/head";
 import { useState } from "react";
 import CorreoVerificado from "./CorreoVerificado";
 import Login from "./Login";
+import Menu from "./Components/Menu"
+ {/* <Login /> */}
+
 function MyApp({ Component, pageProps }) {
   const [userName, setuserName] = useState(null);
   return (
@@ -16,12 +19,16 @@ function MyApp({ Component, pageProps }) {
       })}
       {userName ? (
         userName.emailVerifed === true ? (
+        <Menu>
           <Component {...pageProps} />
+        </Menu>
         ) : (
           <CorreoVerificado />
         )
       ) : (
-        <Login />
+        <Menu>
+          <Component {...pageProps} />
+        </Menu>
       )}
     </>
   );
