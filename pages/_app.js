@@ -13,12 +13,14 @@ function MyApp({ Component, pageProps }) {
       </Head>
       {auth.onAuthStateChanged((user) => {
         setuserName(user);
+       
       })}
       {userName ? (
-        userName.emailVerifed === true ? (
+        userName.emailVerified === true ? (
           <Component {...pageProps} />
         ) : (
           <CorreoVerificado />
+         
         )
       ) : (
         <Login />
