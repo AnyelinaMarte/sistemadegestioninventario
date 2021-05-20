@@ -1,65 +1,35 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-
+import Button from '@material-ui/core/Button'
+import Link from 'next/link';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import CardResult from './Components/CardResult';
+import Actividad from './Components/Actividad';
+import {GraficaVentaSemanal} from './Components/Graficas'
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <section>
+      <article className="grid-index">
+        <div>
+          <p className="descripcion-general">Descripcion General</p>
+          <h1 className="h1-descripcion-general">Buenos dias Yariely Marte</h1>
+          <p className="descripcion-general-p">Esto es lo que está sucediendo con tu  negocio hoy</p>
         </div>
-      </main>
+        <div className="button-estadistica">
+          <Button variant="contained" style={{background:'#5664D2',fontWeight:'bold', borderRadius:'70px'}}>
+            <Link href="/Estadisticas"><a>Ver estadisticas </a></Link>
+          </Button>
+        </div>
+      </article>
+     <div className="grid-promedios">
+       <div>
+        <CardResult value={70} titulo="Promedio Ventas Semanal" />
+       </div>
+       <div>
+        <CardResult value={30} titulo="Ventas de hoy" />
+       </div>
+     </div>
+     <Actividad/>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+     <GraficaVentaSemanal/>
+    </section>
   )
 }

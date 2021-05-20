@@ -1,15 +1,123 @@
 html,
 body {
+  background: #F4F5F7;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x: hidden;
   }
-
+  
 
 
 * {
   box-sizing: border-box;
+}
+/* Navegacion  */
+.navBar{
+  position: fixed;
+  background: #5664D2;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 63px;
+  color: white;
+  margin-bottom: 50px;
+
+}
+.navBar h1{
+  position:fixed;
+  top:2px;
+  left: 100px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+}
+.navBar ul{
+  display: flex;
+  position: fixed;
+  top: 0px;
+  right: 40px;
+}
+.navBar li{
+  list-style: none;
+  font-weight: bold;
+}
+.menu-izquierdo{
+  width: 254px;
+  height: 100vh;
+  background: white;
+  padding-top: 100px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.226);
+  position: fixed;
+  top: 15px;
+
+}
+.main-container{
+  margin-left: 270px;
+  margin-top:80px;
+}
+.menu-izquierdo{
+  padding: 0%;
+}
+.menu-izquierdo span{
+  font-weight: bold;
+  padding-left: 30px;
+  font-size: 15px;
+  color:#172B4D;
+  text-transform: uppercase;
+
+}
+.menu-izquierdo a{
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-size: 18px;
+  color: #6B778C;
+  
+
+}
+.icon-1{
+  padding-right: 152px;
+}
+.icon-2{
+  padding-right: 111px;
+}
+.icon-3{
+  padding-right: 106px;
+}
+.icon-4{
+  padding-right: 142px;
+}
+.icon-5{
+  padding-right: 91px;
+}
+.icon-6{
+  padding-right: 139px;
+}
+.icon-7{
+  padding-right: 65px;
+}
+.icon-8{
+  padding-right: 75px;
+}
+.menu-izquierdo a:hover{
+  color: #5664D2;
+  cursor:pointer;
+  background: #F4F6F8;
+  border: 2px solid #5664D2;
+  border-color: transparent transparent transparent #5664D2;
+}
+.menu-izquierdo li:nth-child(1){
+  margin-top: 60px;
+  
+
+}
+.menu-izquierdo li{
+  list-style: none;
+  margin-bottom: 18px;
+  width: 100%;
 }
 
 /*Container + formularios */
@@ -19,6 +127,12 @@ body {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.219);
   width: 400px;
   margin-bottom: 30px;
+  background: white;
+
+}
+.form-añdir{
+  background: white;
+
 }
 .form-añdir h2{
   color: gray;
@@ -31,12 +145,135 @@ body {
 }
 .form-añdir input{
   border: none;
-
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.062);
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
 }
 .form-añdir input:hover{
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.144);
+
+}
+
+/* Tablas */
+table{
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.267);
+  background: white;
+}
+.titulos-table{
+  text-transform: uppercase;
+}
+tr{
+  border: 1px solid black;
+}
+tbody td:nth-child(1){
+  font-weight: bold;
+  border: 1px solid black;
+  border-color: transparent black transparent transparent;
+}
+td, th{
+  text-align: center;
+  padding: 10px 15px 10px 15px;
+}
+
+
+/* Index  */
+.grid-index{
+  display: flex;
+  padding-left: 30px;
+}
+.grid-index a{
+  text-decoration: none;
+  color: white;
+}
+.button-estadistica{
+  margin-left: auto;
+  margin-top: 80px;
+  margin-right: 140px;
+}
+
+.descripcion-general{
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #6B778C;
+  font-size: 14px;
+
+}
+.h1-descripcion-general{
+  color:#172B4D;
+  font-size: 26px;
+
+}
+.descripcion-general-p{
+  color: #6B778C;
+  font-size: 15px;
+
+
+}
+.card-result{
+  border-radius: 20px;
+  background: white;
+  margin: 20px;
+  padding: 14px;
+  width: 350px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.205);
+
+}
+.grid-result div:nth-child(1){
+  margin-right: 20px;
+  margin-top: 18px;
+}
+.grid-result{
+  display: flex;
+}
+.grid-result span{
+  font-size:50px ;
+  color: #172B4D;
+}
+.grid-result p{
+  color: #3d485a;
+}
+.grid-promedios{
+  display: flex;
+}
+
+.Actividades-main {
+  background: white;
+  border-radius: 20px;
+  position: absolute;
+  right: 10px;
+  top: 250px;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.205);
+
+}
+.Actividades-main h1{
+  color: #172B4D;
+}
+.Actividades-main span{
+  color: #3d485a;
+}
+.Actividades-main h2{
+  text-transform: uppercase;
+  color: #172B4D;
+}
+.Actividades-main p{
+  width: 340px;
+
+}
+.barras-ventasSemanal{
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.205);
+  width: 68%;
+  padding: 10px;
+  border-radius: 15px;
+  background: white;
+}
+.barras-ventasSemanal h1{
+  color: #172B4D;
+  padding-left: 10px;
+}
+.barras-ventasSemanal time{
+  color: #3d485a;
+  padding-left: 10px;
 
 }

@@ -1,7 +1,6 @@
 import ContainerForm from "./Components/Forms/ContainerForm";
 import FormCategoria from "./Components/Forms/FormCategoria";
 import Tabla from './Components/Tabla';
-
 const tituloTabla = [
     'Id','Descripcion'
 ]
@@ -14,9 +13,9 @@ export default function Categoria(){
         <main>
             <ContainerForm>
                  <FormCategoria/>
-            </ContainerForm>
+            </ContainerForm> 
 
-            <Tabla titulo={tituloTabla} cuerpo={datosTabla} dato1={'id'} dato2={'descripcion'}/>
+            <Tabla titulo={tituloTabla} cuerpo={datosTabla} dato1={'id'} dato2={'descripcion'} tituloTabla="Categoria"/>
             
         </main>
     )
