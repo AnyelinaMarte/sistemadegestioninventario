@@ -1,6 +1,9 @@
 import ContainerForm from "./Components/Forms/ContainerForm";
 import FormCategoria from "./Components/Forms/FormCategoria";
 import Tabla from './Components/Tabla';
+import {db,auth} from '../BD/conf';
+import {addBD} from '../BD/CRUD';
+import {useState, useEffect} from 'react';
 
 const tituloTabla = [
     'Id','Descripcion'
@@ -10,10 +13,11 @@ const datosTabla = [
     {id:2, descripcion: 'Enlatado' },
 ]
 export default function Categoria(){
+  
     return(
         <main>
             <ContainerForm>
-                 <FormCategoria/>
+                 <FormCategoria {...{ addCategoria, currentId, data }}/>
             </ContainerForm>
 
             <Tabla titulo={tituloTabla} cuerpo={datosTabla} dato1={'id'} dato2={'descripcion'}/>
