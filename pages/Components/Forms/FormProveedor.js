@@ -20,8 +20,17 @@ export default function FormProveedor(props){
        }
        const handleSubmit=(e)=>{
             e.preventDefault()
-            props.addProveedor(valor)
-            setValor({...valorInicial})
+            if (valor.nombreProveedor != ''){
+                if(valor.correoProveedor != ''){
+                    if(valor.telefonoProveedor != ''){
+                        if (valor.direccionProveedor != ''){
+                            props.addProveedor(valor)
+                            setValor({...valorInicial})
+                        }
+                        else{ console.log("No puede dejar la direccion vacia") }
+                    } else{console.log("No puede dejar el telefono vacio") }
+                } else{ console.log("No puede dejar el correo vacio") }
+            }else{console.log("No puede dejar el nombre vacio") }    
        }
        const getData=(id)=>{
            auth.onAuthStateChanged(async user=>{

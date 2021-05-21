@@ -16,8 +16,12 @@ export default function FormCategoria(props){
    }
    const handleSubmit=(e)=>{
         e.preventDefault()
-        props.addCategoria(valor)
-        setValor({...valorInicial})
+        if (valor.descripcionCategoria != ''){
+            props.addCategoria(valor)
+            setValor({...valorInicial})}
+        else{
+            console.log("No se admiten campos Vacios")
+        }
    }
    const getData=(id)=>{
        auth.onAuthStateChanged(async user=>{

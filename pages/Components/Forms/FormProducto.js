@@ -59,11 +59,27 @@ export default function FormProducto(props){
             setValor({...valor,[name]:value})
     
        }
-       const handleSubmit=(e)=>{
-            e.preventDefault()
-            props.addProducto(valor)
-            setValor({...valorInicial})
-       }
+      const handleSubmit=(e)=>{
+        e.preventDefault()
+            if (valor.descripcionProducto != ''){
+              if(valor.categoriaProducto != ''){
+                if(valor.proveedorProducto != ''){
+                  if(valor.precioCProducto != ''){
+                    if(valor.precioVProducto != ''){
+                      if(valor.cantidadEntrante != ''){
+                        valor.existenciaProducto=valor.cantidadEntrante
+                        props.addProducto(valor)
+                        setValor({...valorInicial})
+                      }
+                      else{ console.log("No se puede dejar el campo cantidad Entrante vacio") }
+                    } else{
+                    console.log("No se puede dejar el campo precio Venta vacio") }
+                  } else{
+                  console.log("No se puede dejar el campo precio Compra vacio")}
+                }else{ console.log("No se puede dejar el campo proveedor vacio") }
+              }else{console.log("No se puede dejar el campo categoria vacio")}
+            }else{ console.log("No se puede dejar el campo nombre vacio")}     
+      }
        const getData=(id)=>{
            auth.onAuthStateChanged(async user=>{
                if (user!=null){
@@ -149,14 +165,7 @@ export default function FormProducto(props){
                  <label>Cantidad Entrante</label>
                  <input onChange={handleChange} value={valor.cantidadEntrante} type="number" placeholder="Cantidad Entrante" name="cantidadEntrante"/>
              </div>
-             <div style={{display:'none'}} >
-                 <label>Salida</label>
-                 <input onChange={handleChange} value={valor.salidaProducto} type="number" placeholder="Salida Producto" name="salidaProducto"/>
-             </div>
-             <div style={{display:'none'}}>
-                 <label>Existencia</label>
-                 <input onChange={handleChange} value={valor.existenciaProducto} type="number" placeholder="Existencia Producto" name="existenciaProducto"/>
-             </div>
+             
              
              <div className="botton-añadir">
                  <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px'}}>
