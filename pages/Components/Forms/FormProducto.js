@@ -1,0 +1,169 @@
+import Button from '@material-ui/core/Button';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import {db,auth} from '../../../BD/conf';
+import Link from "next/link";
+
+import EditIcon from '@material-ui/icons/Edit';
+import {useState, useEffect} from 'react';
+
+export default function FormProducto(props){
+    const [getProveedor, setGetProveedor] = useState([]);
+  const [getCategoria, setGetCategoria] = useState([]);
+  const getDataProveedor = () => {
+    auth.onAuthStateChanged(async (user) => {
+      if(user != null){
+        db.collection('Usuario').doc(user.uid).collection('Proveedor').onSnapshot((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push(doc.data());
+          });
+          setGetProveedor(docs);
+        });
+      }
+    });
+  };
+
+  const getDataCategoria = () => {
+    auth.onAuthStateChanged(async (user) => {
+      if(user != null){
+        db.collection('Usuario').doc(user.uid).collection('Categoria').onSnapshot((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push(doc.data());
+          });
+          setGetCategoria(docs);
+        });
+      }
+    });
+  };
+
+  useState(() => {
+    getDataProveedor();
+    getDataCategoria();
+  }, []);
+    const valorInicial={
+        descripcionProducto:'',
+        categoriaProducto:'',
+        proveedorProducto:'',
+        precioCProducto:0,
+        precioVProducto:0,
+        cantidadEntrante:1,
+        salidaProducto:0,
+        existenciaProducto:0
+
+       }
+       const [valor, setValor]= useState(valorInicial)
+    
+       const handleChange =(e)=>{
+            const {name, value}= e.target
+            setValor({...valor,[name]:value})
+    
+       }
+       const handleSubmit=(e)=>{
+            e.preventDefault()
+            props.addProducto(valor)
+            setValor({...valorInicial})
+       }
+       const getData=(id)=>{
+           auth.onAuthStateChanged(async user=>{
+               if (user!=null){
+                const docu = await  db.collection('Usuario').doc(user.uid).collection('Producto').doc(id).get()
+            setValor({...docu.data()})   
+            }
+               
+           })
+       }
+       useEffect(()=>{
+            if (props.currentId!=''){
+                getData(props.currentId)
+            }
+            else{
+                setValor({...valorInicial})
+            }
+       },[props.currentId])
+    return(
+        <form onSubmit={handleSubmit} className="form-añdir">
+        <h2>Registrar Producto</h2> 
+             
+             <div>
+                 <label>Descripcion</label>
+                 <input onChange={handleChange} value={valor.descripcionProducto} type="text" placeholder="Descripcion" name="descripcionProducto"/>
+             </div>
+             <div>
+             <label >Categoria</label>
+        {getCategoria.length === 0 ? (
+          <Link href="/Categoria">
+            <Button variant="container" color="primary">
+              Añadir Categoria
+            </Button>
+          </Link>
+        ) : (
+          <select
+            name="categoriaProducto"
+            id="nameCategoria"
+            onChange={handleChange}
+          >
+            <option value="Ninguno">No selecionado</option>
+            {getCategoria.map((categoria) => (
+              <option value={categoria.descripcionCategoria}>
+                {categoria.descripcionCategoria}
+              </option>
+            ))}
+          </select>
+        )}
+             </div>
+             <div>
+             <label >Proveedor</label>
+        {getProveedor.length === 0 ? (
+          <Link href="/Proveedor">
+            <Button variant="container" color="primary">
+              Añadir Proveedor
+            </Button>
+          </Link>
+        ) : (
+          <select
+         
+            required
+            name="proveedorProducto"
+            id="nameProveedor"
+            onChange={handleChange}
+          >
+            <option value=" ">No selecionado</option>
+            {getProveedor.map((proveedor) => (
+              <option value={proveedor.nombreProveedor}>
+                {proveedor.nombreProveedor}
+              </option>
+            ))}
+          </select>
+        )}
+             </div>
+             <div>
+                 <label>Precio Compra</label>
+                 <input onChange={handleChange} value={valor.precioCProducto} type="number" placeholder="Precio Compra" name="precioCProducto"/>
+             </div>
+             <div>
+                 <label>Precio Venta</label>
+                 <input onChange={handleChange} value={valor.precioVProducto} type="number" placeholder="Precio Venta" name="precioVProducto"/>
+             </div>
+             <div>
+                 <label>Cantidad Entrante</label>
+                 <input onChange={handleChange} value={valor.cantidadEntrante} type="number" placeholder="Cantidad Entrante" name="cantidadEntrante"/>
+             </div>
+             <div style={{display:'none'}} >
+                 <label>Salida</label>
+                 <input onChange={handleChange} value={valor.salidaProducto} type="number" placeholder="Salida Producto" name="salidaProducto"/>
+             </div>
+             <div style={{display:'none'}}>
+                 <label>Existencia</label>
+                 <input onChange={handleChange} value={valor.existenciaProducto} type="number" placeholder="Existencia Producto" name="existenciaProducto"/>
+             </div>
+             
+             <div className="botton-añadir">
+                 <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px'}}>
+                <AddCircleIcon style={{fontSize:25, color:'green'}} /> 
+                     
+                 </Button>
+             </div>
+         </form>
+    )
+}
