@@ -44,21 +44,17 @@ export default function FormProveedor(props){
         <form onSubmit={handleSubmit} className="form-añdir">
         <h2>Registrar Proveedor</h2> 
              
-             <div>
-                 <label>Nombre:</label>
-                 <input onChange={handleChange} value={valor.nombreProveedor} type="text" placeholder="Seccion" name="nombreProveedor"/><br></br>
-                 <label>Correo:</label>
-                 <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Seccion" name="correoProveedor"/><br></br>
-                 <label>Telefono:</label>
-                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Seccion" name="telefonoProveedor"/><br></br>
-                 <label>Direccion:</label>
-                 <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Seccion" name="direccionProveedor"/>
+             <div className="input-form">
+                 <input onChange={handleChange} value={valor.nombreProveedor} type="text" placeholder="Nombre Proveedor" name="nombreProveedor"/>
+                 <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/><br></br>
+                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor"/>
+                 <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Direccion Proveedor" name="direccionProveedor"/>
              </div>
              <div className="botton-añadir">
-                 <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px'}}>
-                <AddCircleIcon style={{fontSize:25, color:'green'}} /> 
-                     
-                 </Button>
+             <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>
+                   Añadir Proveedor  <AddCircleIcon style={{fontSize:25, color:'white'}} /> 
+                    
+                </Button>
              </div>
          </form>
     )

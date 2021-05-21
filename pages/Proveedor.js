@@ -3,7 +3,8 @@ import FormProveedor from "./Components/Forms/FormProveedor";
 import {auth,db} from "../BD/conf"
 import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import UpdateIcon from '@material-ui/icons/Edit';
 
 export default function Proveedor(){
     const [currentId,setcurrentId]=useState('')
@@ -31,51 +32,60 @@ export default function Proveedor(){
     },[])
     return(
         <main>
-            <ContainerForm>
-                 <FormProveedor addProveedor={addProveedor} currentId={currentId}/>
-            </ContainerForm> 
-       <table>
-           <tr>
+           <section className="form-table proveedor">
+                    <ContainerForm>
+                            <FormProveedor addProveedor={addProveedor} currentId={currentId}/>
+                        </ContainerForm> 
+                <table>
+                    <tr>
 
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Correo
-                </th>
-                <th>
-                    Telefono
-                </th>
-                <th>
-                    Direccion
-                </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Correo
+                            </th>
+                            <th>
+                                Telefono
+                            </th>
+                            <th>
+                                Direccion
+                            </th>
+                            <th>
+                                Editar
+                            </th>
+                            <th>
+                                Eliminar
+                            </th>
 
-           </tr>
-           {datos.map(doc=>
-                <tr>
-                    <td>
-                        {doc.nombreProveedor}
-                    </td>
-                    <td>
-                        {doc.correoProveedor}
-                    </td>
-                    <td>
-                        {doc.telefonoProveedor}
-                    </td>
-                    <td>
-                        {doc.direccionProveedor}
-                    </td>
-                    <td>
-                        <button onClick={()=>setcurrentId(doc.id)}>Actualizar</button>
-                    </td>
-                    <td>
-                        <button onClick={()=>deleteProveedor(doc.id,doc.nombreProveedor,doc.correoProveedor,doc.telefonoProveedor,doc.direccionProveedor)}>Eliminar</button>
-                    </td>
-                </tr>
-           )}
-       </table>
-            
-            
+
+                    </tr>
+                    {datos.map(doc=>
+                            <tr>
+                                <td>
+                                    {doc.nombreProveedor}
+                                </td>
+                                <td>
+                                    {doc.correoProveedor}
+                                </td>
+                                <td>
+                                    {doc.telefonoProveedor}
+                                </td>
+                                <td>
+                                    {doc.direccionProveedor}
+                                </td>
+                                <td>
+                                    <button onClick={()=>setcurrentId(doc.id)}><UpdateIcon color="primary"/></button>
+                                </td>
+                                <td>
+                                    <button onClick={()=>deleteProveedor(doc.id,doc.nombreProveedor,doc.correoProveedor,doc.telefonoProveedor,doc.direccionProveedor)}><DeleteIcon color="secondary"/></button>
+                                </td>
+                            </tr>
+                    )}
+                </table>
+                        
+                    
+           </section> 
         </main>
     )
 }

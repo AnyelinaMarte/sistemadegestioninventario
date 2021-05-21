@@ -121,60 +121,6 @@ body {
 }
 
 /*Container + formularios */
-.container-form{
-  margin-top: 80px;
-  padding: 20px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.219);
-  width: 400px;
-  margin-bottom: 30px;
-  background: white;
-
-}
-.form-añdir{
-  background: white;
-
-}
-.form-añdir h2{
-  color: gray;
-}
-.form-añdir label{
-  color: gray;
-  text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-}
-.form-añdir input{
-  border: none;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.062);
-  margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
-}
-.form-añdir input:hover{
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.144);
-
-}
-
-/* Tablas */
-table{
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.267);
-  background: white;
-}
-.titulos-table{
-  text-transform: uppercase;
-}
-tr{
-  border: 1px solid black;
-}
-tbody td:nth-child(1){
-  font-weight: bold;
-  border: 1px solid black;
-  border-color: transparent black transparent transparent;
-}
-td, th{
-  text-align: center;
-  padding: 10px 15px 10px 15px;
-}
-
 
 /* Index  */
 .grid-index{
@@ -275,5 +221,70 @@ td, th{
 .barras-ventasSemanal time{
   color: #3d485a;
   padding-left: 10px;
+}
 
+.form-table{
+  background: white;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.295);
+  border-radius: 20px;
+  padding:20px;
+  margin-bottom: 20px;
+}
+
+.form-añdir input{
+  padding:13px 18px 13px 18px ;
+  border: 1px solid #3d485a;
+  border-radius: 15px;
+  font-size: 14px;
+
+}
+.form-añdir input:hover{
+  padding:12px 17px 12px 17px ;
+  border: 2px solid #5664D2;
+}
+.form-añdir input:placeholder{
+  color:#3d485a;
+  font-weight: bold;
+}
+.categoria{
+  width:450px;
+}
+hr{
+  width: 100%;
+}
+.form-table{
+  margin-top: 40px;
+  margin-left: 50px;
+}
+.form-table th{
+  color:#172B4D;
+  padding-right: 40px;
+  font-size: 18px;
+}
+.form-table tr{
+  border: 1px solid #172B4D;
+}
+.form-table h2{
+  color: #172B4D;
+  text-transform: uppercase;
+  font-size: 19px;
+}
+.form-table table{
+  color: #172B4D;
+  margin-top: 35px;
+}
+.form-table td{
+  font-size: 18px;
+  padding: 13px;
+}
+.form-table td button{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.input-form input{
+  margin: 10px;
+}
+.proveedor{
+  width: 800px;
 }

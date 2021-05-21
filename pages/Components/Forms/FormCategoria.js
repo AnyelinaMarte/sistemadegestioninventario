@@ -38,15 +38,13 @@ export default function FormCategoria(props){
    },[props.currentId])
     return(
         <form onSubmit={handleSubmit} className="form-añdir">
-       <h2>Registrar Categoria</h2> 
-            
+            {props.currentId == ''?<h2>Registrar Categoria</h2>:<h2>Actualizar Categoria</h2>  } 
             <div>
-                <label>Descripcíon</label>
-                <input onChange={handleChange} value={valor.descripcionCategoria} type="text" placeholder="Seccion" name="descripcionCategoria"/>
+                <input onChange={handleChange} value={valor.descripcionCategoria} type="text" placeholder="Registra una categoria" name="descripcionCategoria"/>
             </div>
             <div className="botton-añadir">
-                <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px'}}>
-               <AddCircleIcon style={{fontSize:25, color:'green'}} /> 
+                <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>
+                   Añadir Categoria  <AddCircleIcon style={{fontSize:25, color:'white'}} /> 
                     
                 </Button>
             </div>
