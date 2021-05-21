@@ -1,26 +1,62 @@
 import ContainerForm from "./Components/Forms/ContainerForm";
 import FormCategoria from "./Components/Forms/FormCategoria";
-import Tabla from './Components/Tabla';
-import {db,auth} from '../BD/conf';
-import {addBD} from '../BD/CRUD';
+import {auth,db} from "../BD/conf"
+import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
 
-const tituloTabla = [
-    'Id','Descripcion'
-]
-const datosTabla = [
-    {id:1, descripcion: 'Limpieza' },
-    {id:2, descripcion: 'Enlatado' },
-]
+
 export default function Categoria(){
-  
+    const [currentId,setcurrentId]=useState('')
+    const [datos,setDatos]=useState([])
+    const addCategoria=(objeto)=>{
+        addBD(currentId,'Categoria',objeto)
+    }
+    const deleteCategoria=(id,Descripcion)=>{
+        deleteBD('Categoria',id,{Descripcion})
+    }
+    useEffect(()=>{
+        auth.onAuthStateChanged(user=>{
+            if (user!=null){
+                db.collection('Usuario').doc(user.uid).collection('Categoria').onSnapshot(querySnapshot=>{
+                    const docs=[]
+                    querySnapshot.forEach(doc=>{
+                        docs.push({...doc.data(),id:doc.id})
+                    })
+                    setDatos(docs)
+                })
+            }
+        })
+
+        
+    },[])
     return(
         <main>
             <ContainerForm>
-                 <FormCategoria {...{ addCategoria, currentId, data }}/>
-            </ContainerForm>
+                 <FormCategoria addCategoria={addCategoria} currentId={currentId}/>
+            </ContainerForm> 
+       <table>
+           <tr>
 
-            <Tabla titulo={tituloTabla} cuerpo={datosTabla} dato1={'id'} dato2={'descripcion'}/>
+                <th>
+                    Descripcion
+                </th>
+
+           </tr>
+           {datos.map(doc=>
+                <tr>
+                    <td>
+                        {doc.descripcionCategoria}
+                    </td>
+                    <td>
+                        <button onClick={()=>setcurrentId(doc.id)}>Actualizar</button>
+                    </td>
+                    <td>
+                        <button onClick={()=>deleteCategoria(doc.id,doc.descripcionCategoria)}>Eliminar</button>
+                    </td>
+                </tr>
+           )}
+       </table>
+            
             
         </main>
     )
