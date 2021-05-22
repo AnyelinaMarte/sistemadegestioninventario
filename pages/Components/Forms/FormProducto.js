@@ -59,6 +59,22 @@ export default function FormProducto(props){
             setValor({...valor,[name]:value})
     
        }
+   const [dataProducto, setdataProducto]=useState([])
+   useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+        if (user!=null){
+            db.collection('Usuario').doc(user.uid).collection('Producto').onSnapshot(querySnapshot=>{
+                const docs=[]
+                querySnapshot.forEach(doc=>{
+                    docs.push({...doc.data(),id:doc.id})
+                })
+                setdataProducto(docs)
+            })
+        }
+    })
+
+    
+},[])
       const handleSubmit=(e)=>{
         e.preventDefault()
             if (valor.descripcionProducto != ''){
@@ -67,9 +83,14 @@ export default function FormProducto(props){
                   if(valor.precioCProducto != ''){
                     if(valor.precioVProducto != ''){
                       if(valor.cantidadEntrante != ''){
-                        valor.existenciaProducto=valor.cantidadEntrante
-                        props.addProducto(valor)
-                        setValor({...valorInicial})
+                        const result = dataProducto.filter(word=>{
+                          return word.descripcionProducto.toLowerCase()===valor.descripcionProducto.toLowerCase()
+                      })
+                          if (result.length == 0){
+                            valor.existenciaProducto=valor.cantidadEntrante
+                            props.addProducto(valor)
+                            setValor({...valorInicial})
+                          }else{console.log("Nombre del producto ya existe")}
                       }
                       else{ console.log("No se puede dejar el campo cantidad Entrante vacio") }
                     } else{

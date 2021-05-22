@@ -18,15 +18,43 @@ export default function FormProveedor(props){
             setValor({...valor,[name]:value})
     
        }
+       const [dataProveedor, setdataProveedor]=useState([])
+       useEffect(()=>{
+        auth.onAuthStateChanged(user=>{
+            if (user!=null){
+                db.collection('Usuario').doc(user.uid).collection('Proveedor').onSnapshot(querySnapshot=>{
+                    const docs=[]
+                    querySnapshot.forEach(doc=>{
+                        docs.push({...doc.data(),id:doc.id})
+                    })
+                    setdataProveedor(docs)
+                })
+            }
+        })
+
+        
+    },[])
        const handleSubmit=(e)=>{
             e.preventDefault()
             if (valor.nombreProveedor != ''){
                 if(valor.correoProveedor != ''){
                     if(valor.telefonoProveedor != ''){
                         if (valor.direccionProveedor != ''){
-                            props.addProveedor(valor)
-                            setValor({...valorInicial})
-                        }
+                            const result = dataProveedor.filter(word=>{
+                                return word.correoProveedor.toLowerCase()===valor.correoProveedor.toLowerCase()
+                            })
+                            if (result.length == 0){
+                                const result = dataProveedor.filter(word=>{
+                                    return word.telefonoProveedor.toLowerCase()===valor.telefonoProveedor.toLowerCase()
+                                }) 
+                                if (result.length == 0){
+                                    props.addProveedor(valor)
+                                    setValor({...valorInicial})
+                                }else{console.log("Numero telefonico existente")}
+
+                            }else{console.log("Correo existente")}
+                            
+                        } 
                         else{ console.log("No puede dejar la direccion vacia") }
                     } else{console.log("No puede dejar el telefono vacio") }
                 } else{ console.log("No puede dejar el correo vacio") }
@@ -56,7 +84,7 @@ export default function FormProveedor(props){
              <div className="input-form">
                  <input onChange={handleChange} value={valor.nombreProveedor} type="text" placeholder="Nombre Proveedor" name="nombreProveedor"/>
                  <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/><br></br>
-                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor"/>
+                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor" />
                  <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Direccion Proveedor" name="direccionProveedor"/>
              </div>
              <div className="botton-añadir">

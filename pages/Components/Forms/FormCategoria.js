@@ -8,21 +8,41 @@ export default function FormCategoria(props){
     descripcionCategoria:''
    }
    const [valor, setValor]= useState(valorInicial)
+   const [dataCategoria, setdataCategoria]=useState([])
+   useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+        if (user!=null){
+            db.collection('Usuario').doc(user.uid).collection('Categoria').onSnapshot(querySnapshot=>{
+                const docs=[]
+                querySnapshot.forEach(doc=>{
+                    docs.push({...doc.data(),id:doc.id})
+                })
+                setdataCategoria(docs)
+            })
+        }
+    }) 
+},[])
 
    const handleChange =(e)=>{
         const {name, value}= e.target
         setValor({...valor,[name]:value})
 
    }
+
    const handleSubmit=(e)=>{
         e.preventDefault()
         if (valor.descripcionCategoria != ''){
-            props.addCategoria(valor)
-            setValor({...valorInicial})}
-        else{
-            console.log("No se admiten campos Vacios")
-        }
+            const result = dataCategoria.filter(word=>{
+                return word.descripcionCategoria.toLowerCase()===valor.descripcionCategoria.toLowerCase()
+            })
+            if (result.length == 0){
+                props.addCategoria(valor)
+                setValor({...valorInicial})
+
+            } else{console.log("Categoria existente")}    
+        }else{console.log("No se admiten campos Vacios") }
    }
+   
    const getData=(id)=>{
        auth.onAuthStateChanged(async user=>{
            if (user!=null){
