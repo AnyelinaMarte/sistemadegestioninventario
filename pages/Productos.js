@@ -3,6 +3,8 @@ import FormProducto from "./Components/Forms/FormProducto";
 import {auth,db} from "../BD/conf"
 import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import UpdateIcon from '@material-ui/icons/Edit';
 
 export default function Productos(){
     const [currentId,setcurrentId]=useState('')
@@ -30,7 +32,8 @@ export default function Productos(){
     },[])
 return (
     <main>
-    <ContainerForm>
+        <section className="form-table producto">
+        <ContainerForm>
          <FormProducto addProducto={addProducto} currentId={currentId}/>
     </ContainerForm> 
 <table>
@@ -90,16 +93,17 @@ return (
                 {doc.existenciaProducto}
             </td>
             <td>
-                <button onClick={()=>setcurrentId(doc.id)}>Actualizar</button>
+                <button onClick={()=>setcurrentId(doc.id)}><UpdateIcon color="primary"/></button>
             </td>
             <td>
-                <button onClick={()=>deleteProducto(doc.id,doc.descripcionProducto,doc.categoriaProducto,doc.proveedorProducto,doc.precioCProducto,doc.precioVProducto,doc.cantidadEntrante,doc.salidaProducto,doc.existenciaProducto)}>Eliminar</button>
+                <button onClick={()=>deleteProducto(doc.id,doc.descripcionProducto,doc.categoriaProducto,doc.proveedorProducto,doc.precioCProducto,doc.precioVProducto,doc.cantidadEntrante,doc.salidaProducto,doc.existenciaProducto)}><DeleteIcon color="secondary"/></button>
             </td>
         </tr>
    )}
 </table>
+
+        </section>
     
-    
-</main>
+    </main>
 )
 }

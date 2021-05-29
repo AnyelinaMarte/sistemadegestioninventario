@@ -2,6 +2,8 @@ import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {db,auth} from '../../../BD/conf';
 import EditIcon from '@material-ui/icons/Edit';
+import swal from 'sweetalert';
+
 import {useState, useEffect} from 'react';
 
 export default function FormProveedor(props){
@@ -12,6 +14,7 @@ export default function FormProveedor(props){
         direccionProveedor:''
        }
        const [valor, setValor]= useState(valorInicial)
+       const CampoVacio = ()=>{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
     
        const handleChange =(e)=>{
             const {name, value}= e.target
@@ -50,15 +53,15 @@ export default function FormProveedor(props){
                                 if (result.length == 0){
                                     props.addProveedor(valor)
                                     setValor({...valorInicial})
-                                }else{console.log("Numero telefonico existente")}
+                                }else{swal("Telefono Proveedor", "No se pueden agregar dos campos con el mismo telefono", "info");}
 
-                            }else{console.log("Correo existente")}
+                            }else{swal("Correo Existente ", "No se pueden agregar dos campos con el mismo correo", "info");}
                             
                         } 
-                        else{ console.log("No puede dejar la direccion vacia") }
-                    } else{console.log("No puede dejar el telefono vacio") }
-                } else{ console.log("No puede dejar el correo vacio") }
-            }else{console.log("No puede dejar el nombre vacio") }    
+                        else{CampoVacio() }
+                    } else{CampoVacio()}
+                } else{CampoVacio() }
+            }else{CampoVacio() }    
        }
        const getData=(id)=>{
            auth.onAuthStateChanged(async user=>{

@@ -3,6 +3,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {db,auth} from '../../../BD/conf';
 import EditIcon from '@material-ui/icons/Edit';
 import {useState, useEffect} from 'react';
+import swal from 'sweetalert';
+
 export default function FormCategoria(props){
    const valorInicial={
     descripcionCategoria:''
@@ -39,8 +41,9 @@ export default function FormCategoria(props){
                 props.addCategoria(valor)
                 setValor({...valorInicial})
 
-            } else{console.log("Categoria existente")}    
-        }else{console.log("No se admiten campos Vacios") }
+            } else{swal("Campo existente", "No se pueden agregar dos campos con el mismo nombre", "info");
+        }    
+        }else{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
    }
    
    const getData=(id)=>{

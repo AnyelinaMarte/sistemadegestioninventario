@@ -2,12 +2,13 @@ import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {db,auth} from '../../../BD/conf';
 import Link from "next/link";
-
 import EditIcon from '@material-ui/icons/Edit';
 import {useState, useEffect} from 'react';
+import swal from 'sweetalert';
 
 export default function FormProducto(props){
     const [getProveedor, setGetProveedor] = useState([]);
+    const CampoVacio = ()=>{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
   const [getCategoria, setGetCategoria] = useState([]);
   const getDataProveedor = () => {
     auth.onAuthStateChanged(async (user) => {
@@ -90,16 +91,15 @@ export default function FormProducto(props){
                             valor.existenciaProducto=valor.cantidadEntrante
                             props.addProducto(valor)
                             setValor({...valorInicial})
-                          }else{console.log("Nombre del producto ya existe")}
+                          }else{swal("Descripcion Producto Existente ", "No se pueden agregar dos campos con el mismo nombre", "info");}
                       }
-                      else{ console.log("No se puede dejar el campo cantidad Entrante vacio") }
+                      else{ CampoVacio() }
                     } else{
-                    console.log("No se puede dejar el campo precio Venta vacio") }
-                  } else{
-                  console.log("No se puede dejar el campo precio Compra vacio")}
-                }else{ console.log("No se puede dejar el campo proveedor vacio") }
-              }else{console.log("No se puede dejar el campo categoria vacio")}
-            }else{ console.log("No se puede dejar el campo nombre vacio")}     
+                      CampoVacio() }
+                  } else{CampoVacio()}
+                }else{ CampoVacio() }
+              }else{CampoVacio()}
+            }else{ CampoVacio()}     
       }
        const getData=(id)=>{
            auth.onAuthStateChanged(async user=>{
@@ -119,15 +119,12 @@ export default function FormProducto(props){
             }
        },[props.currentId])
     return(
-        <form onSubmit={handleSubmit} className="form-añdir">
+        <form onSubmit={handleSubmit} className="form-producto">
         <h2>Registrar Producto</h2> 
-             
-             <div>
-                 <label>Descripcion</label>
-                 <input onChange={handleChange} value={valor.descripcionProducto} type="text" placeholder="Descripcion" name="descripcionProducto"/>
-             </div>
-             <div>
-             <label >Categoria</label>
+        <div className="regist-producto">
+                 <input className="input-producto" onChange={handleChange} value={valor.descripcionProducto} type="text" placeholder="Descripcion" name="descripcionProducto"/>
+             <fieldset>
+             <legend >Categoria</legend>
         {getCategoria.length === 0 ? (
           <Link href="/Categoria">
             <Button variant="container" color="primary">
@@ -148,9 +145,9 @@ export default function FormProducto(props){
             ))}
           </select>
         )}
-             </div>
-             <div>
-             <label >Proveedor</label>
+             </fieldset>
+             <fieldset>
+             <legend >Proveedor</legend>
         {getProveedor.length === 0 ? (
           <Link href="/Proveedor">
             <Button variant="container" color="primary">
@@ -173,26 +170,28 @@ export default function FormProducto(props){
             ))}
           </select>
         )}
+        
+             </fieldset>
              </div>
-             <div>
-                 <label>Precio Compra</label>
+             <fieldset>
+                 <legend>Precio Compra</legend>
                  <input onChange={handleChange} value={valor.precioCProducto} type="number" placeholder="Precio Compra" name="precioCProducto"/>
-             </div>
-             <div>
-                 <label>Precio Venta</label>
+             </fieldset>
+             <fieldset>
+                 <legend>Precio Venta</legend>
                  <input onChange={handleChange} value={valor.precioVProducto} type="number" placeholder="Precio Venta" name="precioVProducto"/>
-             </div>
-             <div>
-                 <label>Cantidad Entrante</label>
+             </fieldset>
+             <fieldset>
+                 <legend>Cantidad Entrante</legend>
                  <input onChange={handleChange} value={valor.cantidadEntrante} type="number" placeholder="Cantidad Entrante" name="cantidadEntrante"/>
-             </div>
+             </fieldset>
              
              
              <div className="botton-añadir">
-                 <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px'}}>
-                <AddCircleIcon style={{fontSize:25, color:'green'}} /> 
-                     
-                 </Button>
+               <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>
+                   Añadir Producto  <AddCircleIcon style={{fontSize:25, color:'white'}} /> 
+                    
+                </Button>
              </div>
          </form>
     )
