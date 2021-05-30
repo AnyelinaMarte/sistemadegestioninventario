@@ -1,4 +1,4 @@
-
+import Avatar from '@material-ui/core/Avatar';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SmsIcon from '@material-ui/icons/Sms';
@@ -9,9 +9,42 @@ import CategoryIcon from '@material-ui/icons/Category';
 import Link from 'next/link'
 import HomeIcon from '@material-ui/icons/Home';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
+import StoreIcon from '@material-ui/icons/Store';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
+import swal from 'sweetalert';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+//import {useState, useEffect} from 'react';
+import {auth, db} from '../../BD/conf';
 export default function Menu({children}) {
 
-  return (
+  const handleActive =()=>{
+    const active = document.getElementById('active-pedido');
+    active.classList.toggle('active-pedido')
+  }
+  const handleActiveMenu = ()=>{
+    const active = document.getElementById('sub-navbar');
+    active.classList.toggle('sub-navbar-active')
+  }
+  const close =()=>{
+    swal({
+      title: "¿Esta seguro que quiere salir de la aplicacion?",
+      text: " ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        auth.signOut().then(console.log(""));
+      } else {
+        console.log('close');
+      }
+    });
+  }
+  return(
     <main>
 
         <ul className="menu-izquierdo">
@@ -20,7 +53,11 @@ export default function Menu({children}) {
           <li><Link href="/Categoria"><a className="icon-2"> <CategoryIcon /> Categoria</a></Link></li>
           <li><Link href="/Proveedor"><a className="icon-3"> <AirportShuttleIcon/> Proveedor</a></Link></li>
           <li><Link href="/Productos"><a className="icon-3"> <ListAltIcon /> Productos</a></Link></li>
-          <li><Link href="/Pedidos"><a className="icon-9"> <CategoryIcon /> Pedidos</a></Link></li>
+          <li><a className="icon-9" onClick={handleActive} > <StorefrontIcon /> Pedidos</a></li>
+          <div className="pedido-div" id="active-pedido">
+            <li onClick={handleActive} ><Link href="/Pedido/Proveedor"><a className="icon-10"> <StoreIcon />Compras a Proveedor</a></Link></li>
+            <li onClick={handleActive}><Link href="/Pedido/Clientes"><a className="icon-11"> <ShoppingCartIcon />Ventas a Clientes</a></Link></li>
+          </div>
           <li><Link href="/Estadisticas"><a className="icon-5"> <ShowChartIcon /> Estadisticas</a></Link></li>
           <li><Link href="/Chats"><a className="icon-6"> <SmsIcon /> Chats</a></Link></li>
           <li><Link href="/Admin"><a className="icon-7"> <SupervisorAccountIcon /> Adiministrador</a></Link></li>
@@ -29,10 +66,25 @@ export default function Menu({children}) {
         <nav className="navBar" >
           <h1><InsertChartIcon/> Sistema de inventario</h1>
           <ul>
-            {/* <li><img src=""/><span>Usuario Actual</span></li>
-            <li></li> */}
+            <li>
+            <Badge badgeContent={4}  color="secondary" >
+              <NotificationsActiveIcon style={{color:'white'}} />
+            </Badge>
+            </li>
+            <li onClick={handleActiveMenu} ><Avatar>O</Avatar></li>
           </ul>
       </nav>
+      <div className="sub-navbar" id="sub-navbar">
+        <span>orlin samuel</span>
+        <hr></hr>
+        <ul>
+          <li onClick={handleActiveMenu} ><Link href="/Admin"><a > <SupervisorAccountIcon /> Adiministrador</a></Link></li>
+          <li onClick={handleActiveMenu} ><Link href="/Configuracion"><a> <SettingsIcon /> Configuracion</a></Link></li>
+        </ul>
+        <Button onClick={close} variant="outlined" color="primary" style={{borderRadius:'22px'}} >
+          cerrar seccion
+        </Button>
+      </div>
       <main className="main-container">
         {children}
       </main>
