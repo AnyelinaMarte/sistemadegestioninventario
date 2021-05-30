@@ -39,9 +39,51 @@ body {
   top: 0px;
   right: 40px;
 }
+.navBar li:nth-child(1){
+  margin-top: 8px;
+}
 .navBar li{
+  margin-right: 25px;
   list-style: none;
   font-weight: bold;
+  cursor: pointer;
+
+}
+.sub-navbar{
+  display: none;
+  width: 200px;
+  background-color: white;
+  position: absolute;
+  right: 9px;
+  top: 57px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.226);
+}
+.sub-navbar ul{
+  margin: 0;
+  padding: 0;
+}
+.sub-navbar span{
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 15px;
+}
+.sub-navbar-active{
+  display: block;
+} 
+.sub-navbar li{
+  list-style: none;
+  margin-bottom: 10px;
+}
+.sub-navbar a{
+  color: #3d485a;
+  text-decoration: none;
+}
+.sub-navbar a:hover{
+  color: #5664D2;
 }
 .menu-izquierdo{
   width: 254px;
@@ -104,6 +146,13 @@ body {
 }
 .icon-9{
   padding-right: 120px;
+}
+.icon-10{
+  padding-right: 60px;
+  margin-bottom: 15px;
+}
+.icon-11{
+  padding-right: 97px;
 }
 .menu-izquierdo a:hover{
   color: #5664D2;
@@ -333,4 +382,59 @@ hr{
 .regist-producto{
   display: grid;
   grid-template-columns: 20% 40% 40%;
+}
+
+.Grid-form-Cliente{
+  display: flex;
+
+}
+.Grid-form-Cliente div{
+  margin:10px;
+}
+.search-producto{
+  margin-left:10px;
+}
+.search-producto input:nth-child(1){
+  margin-right:20px;
+  width:45%;
+}
+.search-producto input:nth-child(2){
+  width:23% ;
+}
+.clientes{
+  width:860px;
+}
+.search-producto button{
+  background-color: #5664D2;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  padding:  12px;
+  font-size: 16px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.226);
+  text-transform: uppercase;
+}
+.pedido-div{
+  position: absolute;
+  background-color: white;
+  top: 45%;
+  padding: 0;
+  display:none;
+  margin-top: 0;
+  width: 290px;
+  height: 100px;
+  padding-bottom: 70px;
+  left:254px;
+  box-shadow: 4px 1px 8px rgba(0, 0, 0, 0.226);
+
+}
+.pedido-div li:nth-child(2){
+  position:absolute;
+  top:16%;
+}
+.active-pedido{
+  display: block;
 }
