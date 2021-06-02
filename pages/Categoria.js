@@ -10,7 +10,7 @@ export default function Categoria(){
     const [datos,setDatos]=useState([])
     const addCategoria=(objeto)=>{
         addBD(currentId,'Categoria',objeto)
-    }
+    } 
     const deleteCategoria=(id,Descripcion)=>{
         deleteBD('Categoria',id,{Descripcion})
     }

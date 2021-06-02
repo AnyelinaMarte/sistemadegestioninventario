@@ -49,4 +49,25 @@ export function deleteBD(nombreBD,id,valores){
       });
 
 }        
-     
+export function addBDPedido(valores){
+
+    auth.onAuthStateChanged(async user=>{
+        if (user!=null){
+            try{
+               
+                   await db.collection('Usuario').doc(user.uid).collection('VentasClientes').doc().set(valores)
+                   valores.productosCliente.forEach(async doc=>{
+                       const resultado= doc.unidades - doc.unidadesProducto
+                       await db.collection('Usuario').doc(user.uid).collection('Producto').doc(doc.id).update({existenciaProducto:resultado})
+                   })
+                   swal("Buen Trabajo", "Se ha agregado correctamente", "success");
+                
+            }
+
+            catch (error){
+                console.log(error)
+            }
+
+        }
+    })
+}
