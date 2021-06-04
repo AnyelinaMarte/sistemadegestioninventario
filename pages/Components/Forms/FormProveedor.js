@@ -11,7 +11,9 @@ export default function FormProveedor(props){
         nombreProveedor :'',
         correoProveedor:'',
         telefonoProveedor:'',
-        direccionProveedor:''
+        direccionProveedor:'',
+        cedulaProveedor:'',
+        rncProveedor:'',
        }
        const [valor, setValor]= useState(valorInicial)
        const CampoVacio = ()=>{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
@@ -43,6 +45,8 @@ export default function FormProveedor(props){
                 if(valor.correoProveedor != ''){
                     if(valor.telefonoProveedor != ''){
                         if (valor.direccionProveedor != ''){
+                            if(valor.cedulaProveedor != ''){
+                                if(valor.rncProeedor != ' '){
                             const result = dataProveedor.filter(word=>{
                                 return word.correoProveedor.toLowerCase()===valor.correoProveedor.toLowerCase()
                             })
@@ -57,12 +61,13 @@ export default function FormProveedor(props){
 
                             }else{swal("Correo Existente ", "No se pueden agregar dos campos con el mismo correo", "info");}
                             
-                        } 
-                        else{CampoVacio() }
+                        }  else{CampoVacio() }
                     } else{CampoVacio()}
                 } else{CampoVacio() }
             }else{CampoVacio() }    
-       }
+       }else{CampoVacio() } 
+    }   else{CampoVacio() } 
+    }
        const getData=(id)=>{
            auth.onAuthStateChanged(async user=>{
                if (user!=null){
@@ -89,6 +94,9 @@ export default function FormProveedor(props){
                  <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/><br></br>
                  <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor" />
                  <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Direccion Proveedor" name="direccionProveedor"/>
+                 <input onChange={handleChange} value={valor.cedulaProveedor} type="text" placeholder="Cedula del Proveedor" name="cedulaProveedor"/>
+                 <input onChange={handleChange} value={valor.rncProveedor} type="text" placeholder="RNC del Proveedor" name="rncProveedor"/>
+
              </div>
              <div className="botton-añadir">
              <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>

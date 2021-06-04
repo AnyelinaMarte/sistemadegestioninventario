@@ -38,6 +38,9 @@ export default function Proveedor(){
                         </ContainerForm> 
                 <table>
                     <tr>
+                    <th>
+                                RNC
+                            </th>
 
                             <th>
                                 Nombre
@@ -52,6 +55,9 @@ export default function Proveedor(){
                                 Direccion
                             </th>
                             <th>
+                                Cedula
+                            </th>
+                            <th>
                                 Editar
                             </th>
                             <th>
@@ -62,6 +68,9 @@ export default function Proveedor(){
                     </tr>
                     {datos.map(doc=>
                             <tr>
+                            <td>
+                                    {doc.rncProveedor}
+                                </td>
                                 <td>
                                     {doc.nombreProveedor}
                                 </td>
@@ -73,6 +82,9 @@ export default function Proveedor(){
                                 </td>
                                 <td>
                                     {doc.direccionProveedor}
+                                </td>
+                                <td>
+                                    {doc.cedulaProveedor}
                                 </td>
                                 <td>
                                     <button onClick={()=>setcurrentId(doc.id)}><UpdateIcon color="primary"/></button>
