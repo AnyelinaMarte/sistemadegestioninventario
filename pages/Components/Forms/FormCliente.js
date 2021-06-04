@@ -66,7 +66,7 @@ export default function FormCliente(props){
             salida:salida,//salida del producto general
             })
 
-
+ 
     }
     const agregarProducto=(e)=>{
         e.preventDefault()
@@ -155,7 +155,7 @@ export default function FormCliente(props){
                 <div>
                 {buscarProducto.map(doc=>
 
-                <tr onClick={()=>clickBuscar(doc.descripcionProducto,doc.existenciaProducto,doc.precioVProducto, doc.id,doc.salidaProducto)}>
+                <tr className="form-cliente-tr" onClick={()=>clickBuscar(doc.descripcionProducto,doc.existenciaProducto,doc.precioVProducto, doc.id,doc.salidaProducto)}>
                     <td>
                         {doc.descripcionProducto}
                     </td> 

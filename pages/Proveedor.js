@@ -14,7 +14,7 @@ export default function Proveedor(){
     }
     const deleteProveedor=(id,nombre,correo,telefono,direccion)=>{
         deleteBD('Proveedor',id,{nombre,correo,telefono,direccion})
-    }
+    } 
     useEffect(()=>{
         auth.onAuthStateChanged(user=>{
             if (user!=null){

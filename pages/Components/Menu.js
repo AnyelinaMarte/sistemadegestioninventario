@@ -16,14 +16,23 @@ import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-//import {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {auth, db} from '../../BD/conf';
 export default function Menu({children}) {
-
+  const [data, setData] = useState("")
   const handleActive =()=>{
     const active = document.getElementById('active-pedido');
     active.classList.toggle('active-pedido')
   }
+  useEffect(()=>{
+    auth.onAuthStateChanged(async user=>{
+      if(user != null){
+        await db.collection('Usuario').doc(user.uid).collection('BD_Usuario').doc('datos_Usuario').get().then(doc =>{
+          setData(doc.data().nombreEmpresa)
+        })
+      }
+    })
+  },[])
   const handleActiveMenu = ()=>{
     const active = document.getElementById('sub-navbar');
     active.classList.toggle('sub-navbar-active')
@@ -46,7 +55,9 @@ export default function Menu({children}) {
   }
   return(
     <main>
-
+      <main className="main-container">
+        {children}
+      </main>
         <ul className="menu-izquierdo">
           <li><span>General</span></li>
           <li><Link href="/"><a className="icon-1"> <HomeIcon  /> Casa</a></Link></li>
@@ -71,11 +82,11 @@ export default function Menu({children}) {
               <NotificationsActiveIcon style={{color:'white'}} />
             </Badge>
             </li>
-            <li onClick={handleActiveMenu} ><Avatar>O</Avatar></li>
+            <li onClick={handleActiveMenu} ><Avatar>{data.substring(0,1)}</Avatar></li>
           </ul>
       </nav>
       <div className="sub-navbar" id="sub-navbar">
-        <span>orlin samuel</span>
+        <span>{data}</span>
         <hr></hr>
         <ul>
           <li onClick={handleActiveMenu} ><Link href="/Admin"><a > <SupervisorAccountIcon /> Adiministrador</a></Link></li>
@@ -85,9 +96,6 @@ export default function Menu({children}) {
           cerrar seccion
         </Button>
       </div>
-      <main className="main-container">
-        {children}
-      </main>
     </main>
   );
 }

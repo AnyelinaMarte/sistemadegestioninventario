@@ -20,7 +20,7 @@ export default function Login(){
             await db.collection('Usuario').doc(User.uid).collection('BD_Usuario').doc('datos_Usuario').set({nombreEmpresa, direccionEmpresa})}
             })
         })
-
+ 
     }
     const datosInicio=(e)=>{
         e.preventDefault()

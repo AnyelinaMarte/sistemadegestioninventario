@@ -14,7 +14,7 @@ export default function FormProveedor(props){
         direccionProveedor:'',
         cedulaProveedor:'',
         rncProveedor:'',
-       }
+       } 
        const [valor, setValor]= useState(valorInicial)
        const CampoVacio = ()=>{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
     
@@ -91,8 +91,8 @@ export default function FormProveedor(props){
              
              <div className="input-form">
                  <input onChange={handleChange} value={valor.nombreProveedor} type="text" placeholder="Nombre Proveedor" name="nombreProveedor"/>
-                 <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/><br></br>
-                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor" />
+                 <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/>
+                 <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor" /><br></br>
                  <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Direccion Proveedor" name="direccionProveedor"/>
                  <input onChange={handleChange} value={valor.cedulaProveedor} type="text" placeholder="Cedula del Proveedor" name="cedulaProveedor"/>
                  <input onChange={handleChange} value={valor.rncProveedor} type="text" placeholder="RNC del Proveedor" name="rncProveedor"/>

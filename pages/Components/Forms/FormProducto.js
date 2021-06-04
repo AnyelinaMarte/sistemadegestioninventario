@@ -122,8 +122,11 @@ export default function FormProducto(props){
         <form onSubmit={handleSubmit} className="form-producto">
         <h2>Registrar Producto</h2> 
         <div className="regist-producto">
-                 <input className="input-producto" onChange={handleChange} value={valor.descripcionProducto} type="text" placeholder="Descripcion" name="descripcionProducto"/>
-             <fieldset>
+          <fieldset>
+             <legend >Descripcion</legend>
+                 <input className="input-producto" placeholder="Descripcion del producto" onChange={handleChange} value={valor.descripcionProducto} type="text"  name="descripcionProducto"/>
+            </fieldset>
+          <fieldset>
              <legend >Categoria</legend>
         {getCategoria.length === 0 ? (
           <Link href="/Categoria">
@@ -142,7 +145,7 @@ export default function FormProducto(props){
               <option value={categoria.descripcionCategoria}>
                 {categoria.descripcionCategoria}
               </option>
-            ))}
+            ))} 
           </select>
         )}
              </fieldset>
@@ -173,20 +176,21 @@ export default function FormProducto(props){
         
              </fieldset>
              </div>
-             <fieldset>
-                 <legend>Precio Compra</legend>
-                 <input onChange={handleChange} value={valor.precioCProducto} type="number" placeholder="Precio Compra" name="precioCProducto"/>
-             </fieldset>
-             <fieldset>
-                 <legend>Precio Venta</legend>
-                 <input onChange={handleChange} value={valor.precioVProducto} type="number" placeholder="Precio Venta" name="precioVProducto"/>
-             </fieldset>
-             <fieldset>
-                 <legend>Cantidad Entrante</legend>
-                 <input onChange={handleChange} value={valor.cantidadEntrante} type="number" placeholder="Cantidad Entrante" name="cantidadEntrante"/>
-             </fieldset>
-             
-             
+             <div className="grid-sub">
+                <fieldset>
+                    <legend>Precio Compra</legend>
+                    <input onChange={handleChange} value={valor.precioCProducto} type="number" placeholder="Precio Compra" name="precioCProducto"/>
+                </fieldset>
+                <fieldset>
+                    <legend>Precio Venta</legend>
+                    <input onChange={handleChange} value={valor.precioVProducto} type="number" placeholder="Precio Venta" name="precioVProducto"/>
+                </fieldset>
+                <fieldset>
+                    <legend>Cantidad Entrante</legend>
+                    <input onChange={handleChange} value={valor.cantidadEntrante} type="number" placeholder="Cantidad Entrante" name="cantidadEntrante"/>
+                </fieldset>
+                
+             </div>
              <div className="botton-añadir">
                <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>
                    Añadir Producto  <AddCircleIcon style={{fontSize:25, color:'white'}} /> 
