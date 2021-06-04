@@ -58,13 +58,14 @@ export default function FormCliente(props){
 
         setProducto({ 
             descripionProducto:descripionProducto, 
-            unidadesProducto: unidades,
+            unidadesProducto: 0,
             precioUnitario:preciounitario,
             id:id,
             totalUnitario:0,
-            unidades:unidades,
-            salida:salida,
+            unidades:unidades,//existencia
+            salida:salida,//salida del producto general
             })
+
 
     }
     const agregarProducto=(e)=>{
@@ -72,12 +73,16 @@ export default function FormCliente(props){
         
         const inputUnidades= document.getElementById('uProductoS').value
 
-        if  (parseInt(inputUnidades) >= 1 && parseInt(inputUnidades) <= parseInt(producto.unidadesProducto)){
+        if  (parseInt(inputUnidades) >= 1 && parseInt(inputUnidades) <= parseInt(producto.unidades)){
               const result = valor.productosCliente.filter(word=>{
                           return word.descripionProducto.toLowerCase()===producto.descripionProducto.toLowerCase()
                       })
                           if (result.length == 0){
-                            producto.unidadesProducto=inputUnidades
+                            producto.unidadesProducto=parseInt(inputUnidades)
+                            producto.totalUnitario = parseInt( inputUnidades) * parseInt( producto.precioUnitario)
+                            producto.salida = parseInt( producto.salida) + parseInt( inputUnidades)
+                            producto.unidades= parseInt( producto.unidades) - parseInt( inputUnidades)
+                            console.log(producto)
                             valor.productosCliente.push({...producto})
                             setValor({
                                 nombreCliente:valor.nombreCliente,
@@ -104,6 +109,24 @@ export default function FormCliente(props){
         setValor({...valorInicial})
    }
    
+   const eliminar=(descripcion)=>{
+        for (var i =0; i<valor.productosCliente.length; i++){
+
+            if (valor.productosCliente[i].descripionProducto==descripcion){
+              
+                 valor.productosCliente.splice(i,1)
+                 console.log(i)
+                 setValor({
+                    nombreCliente:valor.nombreCliente,
+                    direccionCliente:valor.direccionCliente,
+                    contactoCliente:valor.contactoCliente,
+                    productosCliente:valor.productosCliente
+                    
+                    })
+            }
+        }
+      
+   }
           
     return(
         <>
@@ -125,7 +148,7 @@ export default function FormCliente(props){
             </div>
             <div className="search-producto">
                 <input type="text"  placeholder="Buscar Productos" name="buscarProductoS" value={producto.descripcionProducto} onChange={buscar}/>
-                <input type="number" placeholder="Unidades" name="unidadesProductoS" id="uProductoS"/>
+                <input type="number" placeholder="Unidades" name="unidadesProductoS" id="uProductoS" min="1"/>
                 <button onClick={agregarProducto}>
                     Añadir
                 </button>
@@ -153,6 +176,8 @@ export default function FormCliente(props){
                         <th>Unidades</th>
                         <th>Precio Unitario</th>
                         <th>Total</th>
+                        <th>Eliminar</th>
+                        
                         
                     </tr>
 
@@ -169,6 +194,10 @@ export default function FormCliente(props){
                         </td>
                          <td>
                         {doc.precioUnitario * doc.unidadesProducto}
+                        </td>
+
+                        <td>
+                        <button onClick={()=>eliminar(doc.descripionProducto)}>Eliminar</button>
                         </td>
                     </tr>
                     )}
