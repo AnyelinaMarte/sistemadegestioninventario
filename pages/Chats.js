@@ -1,9 +1,12 @@
 export default function Chats(){
     return(
-       <form>
-            <label>
-                <input type="text" placeholder="Escribe un mensaje"/>
-            </label>
-       </form>
+       <main>
+           <div className="menu-chat">
+
+           </div>
+           <div className="chat-actual">
+                
+           </div>
+       </main>
     )
 }
