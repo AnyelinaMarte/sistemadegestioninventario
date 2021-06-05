@@ -1,5 +1,15 @@
 export default function Configuracion(){
     return(
-        <h1>ola</h1>
+        <form>
+            <label>Correo </label>
+            <input/>
+            <label>Nombre </label>
+            <input/>
+            <label>Direccion</label>
+            <input/>
+            <label>Clave </label>
+            <input/>
+            <button>Cambiar</button>
+        </form>
     )
 }
