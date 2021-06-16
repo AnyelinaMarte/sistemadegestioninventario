@@ -14,17 +14,21 @@ export default function FormCliente(props){
         precioTotal:0,
 
     }
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    var fecha = new Date();
+  
     const valorInicial={
         nombreCliente:'',
         direccionCliente:'',
         contactoCliente:'',
+        fechaVenta:{dia:fecha.getDate(),mes:meses[fecha.getMonth()],ano:fecha.getFullYear()} ,
         productosCliente:[],
    }
    const [producto, setProducto]= useState(productoC)
    const [valor, setValor]= useState(valorInicial)
    const [datosproducto, setdatosProducto]= useState([])
    const [buscarProducto, setbuscarProducto]= useState([])
-
+   
       useEffect(()=>{
         auth.onAuthStateChanged(user=>{
             if (user!=null){
@@ -88,7 +92,8 @@ export default function FormCliente(props){
                                 nombreCliente:valor.nombreCliente,
                                 direccionCliente:valor.direccionCliente,
                                 contactoCliente:valor.contactoCliente,
-                                productosCliente:valor.productosCliente
+                                productosCliente:valor.productosCliente,
+                                fechaVenta:{dia:fecha.getDate(),mes:meses[fecha.getMonth()],ano:fecha.getFullYear()}
                                 
                                 })
                           }else{swal("Descripcion Producto Existente ", "No se pueden agregar dos campos con el mismo nombre", "info");}
@@ -120,7 +125,9 @@ export default function FormCliente(props){
                     nombreCliente:valor.nombreCliente,
                     direccionCliente:valor.direccionCliente,
                     contactoCliente:valor.contactoCliente,
-                    productosCliente:valor.productosCliente
+                    productosCliente:valor.productosCliente,
+                    fechaVenta:{dia:fecha.getDate(),mes:meses[fecha.getMonth()],ano:fecha.getFullYear()} ,
+
                     
                     })
             }

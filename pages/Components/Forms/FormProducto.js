@@ -41,13 +41,21 @@ export default function FormProducto(props){
   useState(() => {
     getDataProveedor();
     getDataCategoria();
-  }, []);
+  }, []); 
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    var fecha = new Date();
+    const diaActual = fecha.getDate()
+    const añoActual = fecha.getFullYear()
+    const mesActual = meses[fecha.getMonth()];
+     const fechaActual = (`${diaActual}/${mesActual}/${añoActual}`)
+
     const valorInicial={
         descripcionProducto:'',
         categoriaProducto:'',
         proveedorProducto:'',
         precioCProducto:0,
         precioVProducto:0,
+        fechaEntrada:fechaActual,
         cantidadEntrante:1,
         salidaProducto:0,
         existenciaProducto:0

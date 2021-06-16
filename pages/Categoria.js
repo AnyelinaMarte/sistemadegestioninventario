@@ -13,7 +13,7 @@ export default function Categoria(){
     } 
     const deleteCategoria=(id,Descripcion)=>{
         deleteBD('Categoria',id,{Descripcion})
-    }
+    } 
     useEffect(()=>{
         auth.onAuthStateChanged(user=>{
             if (user!=null){
