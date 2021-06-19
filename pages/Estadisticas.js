@@ -33,6 +33,8 @@ export default function Estadisticas(){
     const [productosMenosV, setproductosMenosV]= useState(valuesProductosMenosVendidos);
     const[descripcionE, setdescripcionE]= useState([])
     const[cantidadE, setcantidadE]= useState([])
+    const[descripcionEA, setdescripcionEA]= useState([])
+    const[cantidadEA, setcantidadEA]= useState([])
 
     const documentos=[] 
    const fecha= new Date()
@@ -105,12 +107,21 @@ export default function Estadisticas(){
             })
             let cantidadExistencia=[]
             let descripcionExistencia=[]
+            let descripcionEAgotados=[]
+            let cantidadEAgotados =[]
             documentos.map(doc=>{
                 descripcionExistencia.push(doc.descripcionProducto)
                 cantidadExistencia.push(doc.existenciaProducto)
+                
+                if(doc.existenciaProducto <= 25){
+                    descripcionEAgotados.push(doc.descripcionProducto)
+                    cantidadEAgotados.push(doc.existenciaProducto)
+                }
             })
             setdescripcionE(descripcionExistencia)
             setcantidadE(cantidadExistencia)
+            setdescripcionEA(descripcionEAgotados)
+            setcantidadEA(cantidadEAgotados)
 
                
             }
@@ -149,7 +160,20 @@ export default function Estadisticas(){
     
         }] 
     };
+    const data5={
+        labels:descripcionEA,
+        datasets:[{
+            label:'Productos Agotados (menos de 25 U Existencias)',
+            backgroundColor:'#83BAFF',
+            borderColor:'#2B2B2B',
+            borderWidth:2,
+            hoverBackgroundColor:'#00E1FF',
+            hoverborderColor:'#83BAFF',
+            data:cantidadEA,
+            
     
+        }] 
+    };
     const data4={
         labels:meses,
         datasets:[{
@@ -196,7 +220,7 @@ export default function Estadisticas(){
       
        }
        
-    
+      
         return(
          <>
       
@@ -212,7 +236,7 @@ export default function Estadisticas(){
           options={opciones}
           />
       </div>
-      <div id="informe2" >
+      <div  >
     <Bar
         data={data2}
         width='100%'
@@ -229,6 +253,14 @@ export default function Estadisticas(){
         options={opciones}  
      />
      </div>
+     <div  >
+    <Bar
+        data={data5}
+        width='100%'
+        height='325px'
+        options={opciones}  
+        />
+    </div>
      <div>
     <Line
         data={data4}
@@ -237,6 +269,7 @@ export default function Estadisticas(){
        
         options={opciones}  
      />
+    
      </div>
       </>:<h1 >NO HAY SUFICIENTES PRODUCTOS REGISTRADOS PARA GENERAR UN INFORME</h1>
     }
