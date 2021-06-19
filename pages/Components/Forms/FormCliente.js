@@ -86,7 +86,7 @@ export default function FormCliente(props){
                             producto.totalUnitario = parseInt( inputUnidades) * parseInt( producto.precioUnitario)
                             producto.salida = parseInt( producto.salida) + parseInt( inputUnidades)
                             producto.unidades= parseInt( producto.unidades) - parseInt( inputUnidades)
-                            console.log(producto)
+                            
                             valor.productosCliente.push({...producto})
                             setValor({
                                 nombreCliente:valor.nombreCliente,
@@ -110,7 +110,10 @@ export default function FormCliente(props){
    }
    const handleSubmit=(e)=>{
         e.preventDefault()
-        addBDPedido(valor)
+        const ano= fecha.getFullYear() + ''
+        const mes= meses[fecha.getMonth()]
+        
+        addBDPedido(valor,ano,mes)
         setValor({...valorInicial})
    }
    

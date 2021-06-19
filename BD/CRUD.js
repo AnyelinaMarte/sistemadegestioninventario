@@ -49,15 +49,16 @@ export function deleteBD(nombreBD,id,valores){
       });
 
 }  
-const fecha= new Date() 
 
-export function addBDPedido(valores){
-getData()
+
+export function addBDPedido(valores,ano,mes){
+
     auth.onAuthStateChanged(async user=>{
         if (user!=null){
             try{
-               
+           
                    await db.collection('Usuario').doc(user.uid).collection('VentasClientes').doc().set(valores)
+                   await db.collection('Usuario').doc(user.uid).collection('VentasMes').doc(ano).collection(mes).doc().set(valores)
                   
                    valores.productosCliente.forEach(async doc=>{
                        

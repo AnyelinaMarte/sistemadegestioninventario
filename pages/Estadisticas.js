@@ -1,4 +1,4 @@
-import { Bar,Pie } from 'react-chartjs-2';
+import { Bar,Pie, Line } from 'react-chartjs-2';
 
 import {auth,db} from "../BD/conf";
 import {useState, useEffect} from 'react';
@@ -35,11 +35,37 @@ export default function Estadisticas(){
     const[cantidadE, setcantidadE]= useState([])
 
     const documentos=[] 
-   
- 
+   const fecha= new Date()
+   var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+ var totalMes=[]
+ var [mesTotal, setmesTotal]=useState([])
+   const ano= fecha.getFullYear() + ''
+   useEffect(()=>{
+    auth.onAuthStateChanged(async (user) => {
+        if(user != null){
+            meses.forEach(mes=>{
+                db.collection('Usuario').doc(user.uid).collection('VentasMes').doc(ano).collection(mes).onSnapshot(Snapshot=>{
+                    let total=0
+                    Snapshot.forEach(datoG=>{
+                        datoG.data().productosCliente.forEach(d=>{
+                            total+= d.totalUnitario
+                        })
+                    })
+                    totalMes.push(total)
+                })
+
+            })
+        }
+    })
+    setmesTotal(totalMes)
+
+   },[])
+
      useEffect(()=>{
     auth.onAuthStateChanged(async (user) => {
         if(user != null){
+           
+            
     
          await  db.collection('Usuario').doc(user.uid).collection('Producto').orderBy("salidaProducto", "desc").get().then(data=>{
              
@@ -123,6 +149,21 @@ export default function Estadisticas(){
     
         }] 
     };
+    
+    const data4={
+        labels:meses,
+        datasets:[{
+            label:'Ganancias Mensuales $',
+            backgroundColor:'#83BAFF',
+            borderColor:'#2B2B2B',
+            borderWidth:2,
+            hoverBackgroundColor:'#00E1FF',
+            hoverborderColor:'#83BAFF',
+            data:mesTotal,
+            
+    
+        }] 
+    };
     var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
                     '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                     '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
@@ -182,6 +223,15 @@ export default function Estadisticas(){
     <div>
     <Pie
         data={data3}
+        width='100%'
+        height='325px'
+       
+        options={opciones}  
+     />
+     </div>
+     <div>
+    <Line
+        data={data4}
         width='100%'
         height='325px'
        
