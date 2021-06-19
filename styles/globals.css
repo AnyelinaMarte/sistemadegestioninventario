@@ -526,3 +526,9 @@ hr{
   color:#5664D2;
   cursor: pointer;
 }
+.name-index{
+  text-transform:capitalize;
+}
+.avatar{
+  text-trasnform:uppercase;
+}

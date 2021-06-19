@@ -66,7 +66,7 @@ export default function Configuracion(){
                                 setOpen(false)
                             }).catch(function(error) {
                                 if(error.code === 'auth/requires-recent-login'){
-                                    swal('Segurida: Al parecer ha durado mucho tiempo para iniciar seccion, por favor cierre la seccion y vuelva abrirla, antes de cambiar', '', 'info')
+                                    swal('Seguridad: Al parecer ha durado mucho tiempo para iniciar seccion, por favor cierre la seccion y vuelva abrirla, antes de cambiar', '', 'info')
                                 }
                           });
                    }

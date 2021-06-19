@@ -82,7 +82,7 @@ export default function Menu({children}) {
               <NotificationsActiveIcon style={{color:'white'}} />
             </Badge>
             </li>
-            <li onClick={handleActiveMenu} ><Avatar>{data.substring(0,1)}</Avatar></li>
+            <li className="avatar" onClick={handleActiveMenu} ><Avatar>{data.substring(0,1)}</Avatar></li>
           </ul>
       </nav>
       <div className="sub-navbar" id="sub-navbar">
