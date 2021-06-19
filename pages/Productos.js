@@ -56,6 +56,9 @@ return (
             Precio Venta
         </th>
         <th>
+            Fecha Entrada
+        </th>
+        <th>
             Entrada
         </th>
         <th>
@@ -63,6 +66,12 @@ return (
         </th>
         <th>
             Existencia
+        </th>
+        <th>
+            Editar
+        </th>
+        <th>
+            Eliminar
         </th>
 
    </tr>
@@ -82,6 +91,9 @@ return (
             </td>
             <td>
                 {doc.precioVProducto}
+            </td>
+            <td>
+                {doc.fechaEntrada}
             </td>
             <td>
                 {doc.cantidadEntrante}

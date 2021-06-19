@@ -48,23 +48,27 @@ export function deleteBD(nombreBD,id,valores){
         }
       });
 
-}        
-export function addBDPedido(valores){
+}  
+
+
+export function addBDPedido(valores,ano,mes){
 
     auth.onAuthStateChanged(async user=>{
         if (user!=null){
             try{
-               
+           
                    await db.collection('Usuario').doc(user.uid).collection('VentasClientes').doc().set(valores)
+                   await db.collection('Usuario').doc(user.uid).collection('VentasMes').doc(ano).collection(mes).doc().set(valores)
+                  
                    valores.productosCliente.forEach(async doc=>{
                        
                        await db.collection('Usuario').doc(user.uid).collection('Producto').doc(doc.id).update({existenciaProducto:doc.unidades, salidaProducto:doc.salida})
-                   })
+                    })
                    swal("Buen Trabajo", "Se ha agregado correctamente", "success");
                 
             }
 
-            catch (error){
+            catch (error){ 
                 console.log(error)
             }
 

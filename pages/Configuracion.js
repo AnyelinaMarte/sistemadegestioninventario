@@ -127,6 +127,7 @@ export default function Configuracion(){
 
     },[])
     return(
+
         <main>
             <h1 className="settign-config">Bienvenido al centro de configuraciones {userData}</h1>
             <section className="settings">
