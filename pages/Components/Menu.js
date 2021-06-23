@@ -66,11 +66,11 @@ export default function Menu({children}) {
           <li><Link href="/Productos"><a className="icon-3"> <ListAltIcon /> Productos</a></Link></li>
           <li><a className="icon-9" onClick={handleActive} > <StorefrontIcon /> Pedidos</a></li>
           <div className="pedido-div" id="active-pedido">
-            <li onClick={handleActive} ><Link href="/Pedido/Proveedor"><a className="icon-10"> <StoreIcon />Compras a Proveedor</a></Link></li>
+            <li onClick={handleActive} ><Link href="/Pedido/ListaVenta"><a className="icon-10"> <StoreIcon />Lista de Ventas</a></Link></li>
             <li onClick={handleActive}><Link href="/Pedido/Clientes"><a className="icon-11"> <ShoppingCartIcon />Ventas a Clientes</a></Link></li>
           </div>
           <li><Link href="/Estadisticas"><a className="icon-5"> <ShowChartIcon /> Estadisticas</a></Link></li>
-          <li><Link href="/Chats"><a className="icon-6"> <SmsIcon /> Chats</a></Link></li>
+          {/*<li><Link href="/Chats"><a className="icon-6"> <SmsIcon /> Chats</a></Link></li>*/}
           <li><Link href="/Admin"><a className="icon-7"> <SupervisorAccountIcon /> Adiministrador</a></Link></li>
           <li><Link href="/Configuracion"><a className="icon-8"> <SettingsIcon /> Configuracion</a></Link></li>
         </ul>
