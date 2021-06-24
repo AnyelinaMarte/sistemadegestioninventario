@@ -21,9 +21,11 @@ export default function ModalCliente(props){
        <div>
            {
                Object.keys(data).length === 0 ?
-               <h1>Datos cargando..</h1>
+               <h1 className="white">Datos cargando..</h1>
                : <section className="Modal-Cliente">
+
                <div className="Modal-Cliente-Grid">
+                   <button className="close-modal" onClick={props.close} >Cerrar</button>
                    <div>
                       <div>
                            <h4>Nombre del Cliente</h4><span>{data.nombreCliente}</span>
@@ -53,7 +55,7 @@ export default function ModalCliente(props){
                            <td>$ {producto.totalUnitario}</td>
                        </tr>    
                         )}
-                        <tr>
+                        <tr className="total-modal">
                             <td>Total</td>
                             <td>$ {TOTAL}</td>
                         </tr>

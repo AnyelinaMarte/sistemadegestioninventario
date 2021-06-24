@@ -1,8 +1,13 @@
 import { Bar,Pie, Line } from 'react-chartjs-2';
-
+import Modal from '@material-ui/core/Modal';
 import {auth,db} from "../BD/conf";
 import {useState, useEffect} from 'react';
-
+import ButtonEstad from './Components/ButtonEstad';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import CallReceivedIcon from '@material-ui/icons/CallReceived';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import WarningIcon from '@material-ui/icons/Warning';
+import DomainIcon from '@material-ui/icons/Domain';
 export default function Estadisticas(){
     const valuesProductosMasVendidos={ 
         descripcionP1:'',
@@ -219,60 +224,135 @@ export default function Estadisticas(){
          responsive:true 
       
        }
-       
+       const [open, setOpen] = useState(false);
+       const [open1, setOpen1] = useState(false);
+       const [open2, setOpen2] = useState(false);
+       const [open3, setOpen3] = useState(false);
+       const [open4, setOpen4] = useState(false);
+       const [open5, setOpen5] = useState(false);
+
+       const handleClose = () => {
+         setOpen(false);
+       };
+       const handleClose1 = () => {
+        setOpen1(false);
+      };
+      const handleClose2 = () => {
+        setOpen2(false);
+      };
       
+      const handleClose3 = () => {
+        setOpen3(false);
+      };
+      const handleClose4 = () => {
+        setOpen4(false);
+      };
         return(
          <>
       
-      <h1 >Estadisticas</h1>
+      <h1 className="title-estadistica" >Estadisticas</h1>
     
     { datosInforme.length >= 10 ?<>
-      <div id="informe1" >
-      
-      <Bar
-          data={data1}
-          width='100%'
-          height='325px'
-          options={opciones}
-          />
-      </div>
-      <div  >
-    <Bar
-        data={data2}
-        width='100%'
-        height='325px'
-        options={opciones}  
-        />
-    </div>
-    <div>
-    <Pie
-        data={data3}
-        width='100%'
-        height='325px'
-       
-        options={opciones}  
-     />
-     </div>
-     <div  >
-    <Bar
-        data={data5}
-        width='100%'
-        height='325px'
-        options={opciones}  
-        />
-    </div>
-     <div>
-    <Line
-        data={data4}
-        width='100%'
-        height='325px'
-       
-        options={opciones}  
-     />
+        <div className="button-estadisticas">
+            <div>
+                <ButtonEstad color="verde" Icon={<TrendingUpIcon/>} click={()=> setOpen(true)}title="Productos mas vendidos" descripcion="Estadistica de los productos que mas a vendido"  />
+            </div>
+            <div>
+                <ButtonEstad color="red" Icon={<CallReceivedIcon />} click={()=> setOpen1(true)}title="Productos menos Vendidos" descripcion="Estadistica de los productos que menos a vendido"  />
+            </div>
+            <div>
+                <ButtonEstad color="amarillo" Icon={<DomainIcon/>} click={()=> setOpen2(true)}title="Existencia de Productos (Unidades)" descripcion="Estadistica de la existencia por productos"  />
+            </div>
+            <div>
+                <ButtonEstad color="color3" Icon={<AttachMoneyIcon/>} click={()=> setOpen4(true)}title="Ganancias Mensuales $" descripcion="Estadistica de las ganacias mensuales de tu negocio"  />
+            </div>
+            <div>
+                <ButtonEstad color="color4" Icon={<WarningIcon/>} click={()=> setOpen3(true)}title="Productos Agotados " descripcion="Los productos con menos de 25 existencia "  />
+            </div>
+        </div>
+  
     
-     </div>
-      </>:<h1 >NO HAY SUFICIENTES PRODUCTOS REGISTRADOS PARA GENERAR UN INFORME</h1>
+      </>:<h1 className="title-estadistica" >NO HAY SUFICIENTES PRODUCTOS REGISTRADOS PARA GENERAR UN INFORME</h1>
     }
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div id="informe1" className="informe" >
+                    <Bar
+                        data={data1}
+                        width='100%'
+                        height='325px'
+                        options={opciones}
+                        />
+                </div>
+            </Modal>
+            <Modal
+                open={open1}
+                onClose={handleClose1}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div  className="informe" >
+                <Bar
+                    data={data2}
+                    width='100%'
+                    height='325px'
+                    options={opciones}  
+                    />
+                </div>
+            </Modal>
+
+            <Modal
+                open={open2}
+                onClose={handleClose2}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                 <div className="informe">
+                    <Pie
+                        data={data3}
+                        width='100%'
+                        height='325px'
+                    
+                        options={opciones}  
+                    />
+                    </div>
+            </Modal>
+            <Modal
+                open={open3}
+                onClose={handleClose3}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div className="informe" >
+                    <Bar
+                        data={data5}
+                        width='100%'
+                        height='325px'
+                        options={opciones}  
+                        />
+                </div>
+            </Modal>   
+            <Modal
+                open={open4}
+                onClose={handleClose4}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+            <div className="informe" >
+                <Line
+                    data={data4}
+                    width='100%'
+                    height='325px'
+                
+                    options={opciones}  
+                />
+            </div>
+            </Modal>
+  
     </>
         )
     }
