@@ -1,26 +1,48 @@
 import { Bar } from 'react-chartjs-2';
+import {auth,db} from "../../BD/conf";
+import {useState, useEffect} from 'react';
 
-const data = {
-  labels: ['1', '2', '3', '4', '5', '6'],
-  datasets: [
-    {
-      label: '# de Votos Rojos',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: 'rgb(255, 99, 132)',
-    },
-    {
-      label: '# de Votos Azul',
-      data: [2, 3, 20, 5, 1, 4],
-      backgroundColor: 'rgb(54, 162, 235)',
-    },
-    {
-      label: '# de Votos Verdes',
-      data: [3, 10, 13, 15, 22, 30],
-      backgroundColor: 'rgb(75, 192, 192)',
-    },
-  ],
+export function GraficaVentaSemanal(){
+  var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+const fecha= new Date()
+var totalMes=[]
+var [mesTotal, setmesTotal]=useState([])
+const ano= fecha.getFullYear() + ''
+
+useEffect(()=>{
+  auth.onAuthStateChanged(async (user) => {
+      if(user != null){
+          meses.forEach(mes=>{
+              db.collection('Usuario').doc(user.uid).collection('VentasMes').doc(ano).collection(mes).onSnapshot(Snapshot=>{
+                  let total=0
+                  Snapshot.forEach(datoG=>{
+                      datoG.data().productosCliente.forEach(d=>{
+                          total+= d.totalUnitario
+                      })
+                  })
+                  totalMes.push(total)
+              })
+
+          })
+      }
+  })
+  setmesTotal(totalMes)
+
+ },[])
+const data={
+  labels:meses,
+  datasets:[{
+      label:'Ganancias Mensuales $',
+      backgroundColor:'#83BAFF',
+      borderColor:'#2B2B2B',
+      borderWidth:2,
+      hoverBackgroundColor:'#00E1FF',
+      hoverborderColor:'#83BAFF',
+      data:mesTotal,
+      
+
+  }] 
 };
-
 const options = {
   scales: {
     yAxes: [
@@ -33,11 +55,10 @@ const options = {
   },
 };
 
-export function GraficaVentaSemanal(){
     return(
         <article className="barras-ventasSemanal">
                 <h1>Venta Mensual</h1>
-                <time>Mayo de 2021</time>
+                <time>{ano}</time>
                 <Bar data={data} options={options} />
         </article>
     )

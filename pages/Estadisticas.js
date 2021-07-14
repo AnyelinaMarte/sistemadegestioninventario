@@ -287,7 +287,9 @@ export default function Estadisticas(){
                         height='325px'
                         options={opciones}
                         />
+                  
                 </div>
+                
             </Modal>
             <Modal
                 open={open1}

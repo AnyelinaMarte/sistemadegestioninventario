@@ -7,6 +7,32 @@ import {GraficaVentaSemanal} from './Components/Graficas';
 import {auth, db} from '../BD/conf';
 import {useState, useEffect} from 'react';
 export default function Home() {
+  var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+  const fecha= new Date()
+  var totalMes=[]
+  var [mesTotal, setmesTotal]=useState([])
+  const ano= fecha.getFullYear() + ''
+  
+  useEffect(()=>{
+    auth.onAuthStateChanged(async (user) => {
+        if(user != null){
+            meses.forEach(mes=>{
+                db.collection('Usuario').doc(user.uid).collection('VentasMes').doc(ano).collection(mes).onSnapshot(Snapshot=>{
+                    let total=0
+                    Snapshot.forEach(datoG=>{
+                        datoG.data().productosCliente.forEach(d=>{
+                            total+= d.totalUnitario
+                        })
+                    })
+                    totalMes.push(total)
+                })
+  
+            })
+        }
+    })
+    setmesTotal(totalMes)
+  
+   },[])
   const [data, setData] = useState("")
   const handleActive =()=>{
     const active = document.getElementById('active-pedido');
@@ -21,6 +47,13 @@ export default function Home() {
       }
     })
   },[])
+  const diasMes=(mes,ano)=>{
+    return new Date(ano, mes, 0).getDate()
+  }
+  var dias = diasMes(fecha.getMonth()+1,fecha.getFullYear())
+  var venta = mesTotal[fecha.getMonth()]
+ var resultado=venta/(7*100)
+ var result = venta/(dias*100)
   return (
     <section>
       <article className="grid-index">
@@ -37,10 +70,10 @@ export default function Home() {
       </article>
      <div className="grid-promedios">
        <div>
-        <CardResult value={70} titulo="Promedio Ventas Semanal" />
+        <CardResult value={parseFloat(resultado).toFixed(2)} titulo="Promedio Ventas Semanales" />
        </div>
        <div>
-        <CardResult value={30} titulo="Ventas de hoy" />
+        <CardResult value={parseFloat(result).toFixed(2)} titulo="Promedio Ventas Diarias" />
        </div>
      </div>
      <Actividad/>
