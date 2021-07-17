@@ -9,6 +9,7 @@ import {useState, useEffect} from 'react';
 export default function FormProveedor(props){
     const valorInicial={
         nombreProveedor :'',
+        apellidoProveedor:'',
         correoProveedor:'',
         telefonoProveedor:'',
         direccionProveedor:'',
@@ -42,6 +43,7 @@ export default function FormProveedor(props){
        const handleSubmit=(e)=>{
             e.preventDefault()
             if (valor.nombreProveedor != ''){
+                if (valor.apellidoProveedor != ''){
                 if(valor.correoProveedor != ''){
                     if(valor.telefonoProveedor != ''){
                         if (valor.direccionProveedor != ''){
@@ -60,7 +62,7 @@ export default function FormProveedor(props){
                                 }else{swal("Telefono Proveedor", "No se pueden agregar dos campos con el mismo telefono", "info");}
 
                             }else{swal("Correo Existente ", "No se pueden agregar dos campos con el mismo correo", "info");}
-                            
+                        } else{CampoVacio() }
                         }  else{CampoVacio() }
                     } else{CampoVacio()}
                 } else{CampoVacio() }
@@ -91,6 +93,7 @@ export default function FormProveedor(props){
              
              <div className="input-form">
                  <input onChange={handleChange} value={valor.nombreProveedor} type="text" placeholder="Nombre Proveedor" name="nombreProveedor"/>
+                 <input onChange={handleChange} value={valor.apellidoProveedor} type="text" placeholder="Apellido Proveedor" name="apellidoProveedor"/>
                  <input onChange={handleChange} value={valor.correoProveedor} type="text" placeholder="Correo Proveedor" name="correoProveedor"/>
                  <input onChange={handleChange} value={valor.telefonoProveedor} type="text" placeholder="Telefono Proveedor" name="telefonoProveedor" /><br></br>
                  <input onChange={handleChange} value={valor.direccionProveedor} type="text" placeholder="Direccion Proveedor" name="direccionProveedor"/>

@@ -9,14 +9,16 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import {auth, db} from '../BD/conf';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     const [state, setState] = useState({
-      checkedA: true,
-      checkedB: true,
-      checkedC: true,
-      checkedD: true,
+      mantenimiento:false,
+      pedidos:false,
+      estadisticas:false,
+      stock:false
     });
+    
     return (
       <div
         role="tabpanel"
@@ -47,11 +49,82 @@ function TabPanel(props) {
   }
   
 export default function Admin(){
+  const valorInicial={
+    nombreProveedor :'',
+    apellidoProveedor:'',
+    correoProveedor:'',
+    telefonoProveedor:'',
+    direccionProveedor:'',
+    cedulaProveedor:'',
+    rncProveedor:'',
+    fechapedidoProveedor:'',
+    descripcionPedidos:''
+   } 
+  const valorInicialActividades={
+    tituloActividad:'',
+    fechaActividad:'',
+    horaActividad:'',
+    descripcionActividad:''
+  }
+  const [valorA, setvalorA]= useState(valorInicialActividades)
+  const [valor, setValor]= useState(valorInicial)
+  const handleChangeActividad=(e)=>{
+    const {name, value}= e.target
+    setvalorA({...valorA,[name]:value})
+  }
+  const handleSubmitActividades=(e)=>{
+    e.preventDefault()
+            auth.onAuthStateChanged(async user=>{
+              if (user != null){
+                  await db.collection('Usuario').doc(user.uid).collection('Actividades').doc().set(valorA)
+            setvalorA({...valorInicialActividades})
+                 
+              }
+            })
+    
+    }
+  
+  const handleChange =(e)=>{
+    const {name, value}= e.target
+    setValor({...valor,[name]:value})
+   
+}
+const handleSubmit=(e)=>{
+e.preventDefault()
+        auth.onAuthStateChanged(async user=>{
+          if (user != null){
+              await db.collection('Usuario').doc(user.uid).collection('PedidosProveedores').doc().set(valor)
+              setValor({...valorInicial})
+              
+          }
+        })
+
+}
     const [value, setValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
+    const handleChanges = (event, newValue) => {
       setValue(newValue);
     };
+    const [getProveedor, setgetProveedor] = useState([])
+    const getDataProveedor = () => {
+      auth.onAuthStateChanged(async (user) => {
+        if(user != null){
+          db.collection('Usuario').doc(user.uid).collection('Proveedor').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+              docs.push(doc.data());
+            });
+            setgetProveedor(docs);
+          });
+        }
+      });
+    };
+    useState(() => {
+      getDataProveedor();
+    }, []); 
+    const llenarCampos =(objeto)=>{
+     setValor({...objeto})
+    }
     return(
         <main>
             <div>
@@ -62,7 +135,7 @@ export default function Admin(){
                 <AppBar position="static" style={{background:'white'}}>
                     <Tabs
                         value={value}
-                        onChange={handleChange}
+                        onChange={handleChanges}
                         variant="scrollable"
                         scrollButtons="on"
                         indicatorColor="primary"
@@ -70,27 +143,30 @@ export default function Admin(){
                         aria-label="scrollable force tabs example"
                     >
                         <Tab label="Control Actividades"  {...a11yProps(0)} />
-                        <Tab label="Control empleados" {...a11yProps(1)} />
-                        <Tab label="Agregar Empleados"  {...a11yProps(2)} />
+                        <Tab label="Control de Pedidos" {...a11yProps(1)} />
+                        <Tab label="Agregar Pedidos a Proveedores"  {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                     <TabPanel value={value} index={0}>
                       <div>
                           <h1 className="admin-title">Actividades </h1>
                           <div>
-                            <form className="form-empleado actividades" >
+                            <form className="form-empleado actividades" onSubmit={handleSubmitActividades} >
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Titulo Actividad" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Titulo Actividad" variant="outlined" name="tituloActividad" onChange={handleChangeActividad} value={valorA.tituloActividad} />
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Fecha de Actividad" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="date" name="fechaActividad" onChange={handleChangeActividad} value={valorA.fechaActividad}/>
                                   </div>
                                   <div>
-                                    <textarea className="textT-Empleado" placeholder="Agrega una descripcion">
+                                    <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="time" name="horaActividad" onChange={handleChangeActividad} value={valorA.horaActividad}/>
+                                  </div>
+                                  <div>
+                                    <textarea className="textT-Empleado" placeholder="Agrega una descripcion" name="descripcionActividad" onChange={handleChangeActividad} value={valorA.descripcionActividad}>
 
                                     </textarea>
                                   </div>
-                                 <div className="center-button"><button>Agregar Actividad</button> </div>
+                                 <div className="center-button"><button onClick={handleSubmitActividades}>Agregar Actividad</button> </div>
                                   
                             </form>
                           </div>
@@ -101,46 +177,57 @@ export default function Admin(){
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                         <div>
-                          <h1 className="admin-title">Agregar Nuevo Empleado</h1>
+                          <h1 className="admin-title">Agregar Nuevo Pedido</h1>
                           <div>
-                            <form className="form-empleado" >
+                            <form className="form-empleado" onSubmit={handleSubmit}>
+                            <select style={{width:'100%' ,height:'35px', margin:'5px 5px 10px 0px'}}>
+                            <option value=" ">No selecionado</option>
+                              {getProveedor.map(proveedor => 
+                                <option value={proveedor.cedulaProveedor } onChange={()=>setValor({...proveedor})}>
+                                
+                                  {proveedor.cedulaProveedor}
+                                </option>
+                              )}
+                            </select>
                               <div className="grid-admin-empleado">
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Nombres *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Nombre Proveedor *" variant="outlined" name="nombreProveedor" onChange={handleChange} value={valor.nombreProveedor}/>
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Apellidos *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Apellido Proveedor*" variant="outlined" name="apellidoProveedor" onChange={handleChange} value={valor.apellidoProveedor}/>
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Correo *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Cedula Proveedor *" variant="outlined" name="cedulaProveedor" onChange={handleChange} value={valor.cedulaProveedor}/>
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Contraseña *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Direccion *" variant="outlined" name="direccionProveedor" onChange={handleChange} value={valor.direccionProveedor}/>
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Cargo *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Correo *" variant="outlined" name="correoProveedor" onChange={handleChange} value={valor.correoProveedor}/>
                                   </div>
                                   <div>
-                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Fecha de entrada *" variant="outlined" />
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Telefono *" variant="outlined" name="telefonoProveedor" onChange={handleChange} value={valor.telefonoProveedor}/>
                                   </div>
-                              </div>
-                                  <span>Roles del empleado</span>
-                                  <div className="grid-check">
-                                    <div>
-                                        <FormControlLabel control={<Checkbox name="checkedA" />} label="Mantenimiento" />
-                                    </div>  
-                                    <div>
-                                        <FormControlLabel control={<Checkbox name="checkedB" />} label="Pedidos" />
-                                    </div>
-                                    <div>
-                                        <FormControlLabel control={<Checkbox name="checkedC" />} label="Estadistica" />
-                                    </div>
-                                    <div>
-                                        <FormControlLabel control={<Checkbox name="checkedD" />} label="Stock" />
-                                    </div>
-                                </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="RNC *" variant="outlined" name="rncProveedor" onChange={handleChange} value={valor.rncProveedor}/>
+                                  </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="date"  name="fechapedidoProveedor" onChange={handleChange} value={valor.fechapedidoProveedor}/>
+                                    
+                                  </div>
+                                  </div>
+                                  <br></br>
+                                  <div>
+                                    <textarea className="textT-Empleado" placeholder="Agrega los productos que necesita para su proxima entrega" name="descripcionPedidos" onChange={handleChange} value={valor.descripcionPedidos}>
 
-                                 <div className="center-button"><button>Agregar Empleado</button> </div>
+                                    </textarea>
+                                  </div>
+                                  
+                                
+                             
+                                 
+
+                                 <div className="center-button"><button onClick={handleSubmit}>Enviar Pedido</button> </div>
                                   
                             </form>
                           </div>
