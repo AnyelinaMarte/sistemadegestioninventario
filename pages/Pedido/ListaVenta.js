@@ -3,7 +3,9 @@ import {auth, db} from '../../BD/conf';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import Modal from '@material-ui/core/Modal'; 
 import ModalCliente from '../Components/ModalCliente';
-import Link from 'next/link'
+import Link from 'next/link';
+import Actividad from '../Components/Actividad';
+
 export default function ListaVenta(){
     const [data, setData] = useState([])
     useEffect(()=>{
@@ -32,6 +34,7 @@ export default function ListaVenta(){
     };
     return(
         <main>
+            <Actividad/>
             <div className="grid-listaVenta">
                 <div><h1>Lista de ordenes</h1></div>
                 <div><Link href="/Pedido/Clientes"><a>Hacer nueva orden</a></Link></div>

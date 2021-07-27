@@ -124,6 +124,38 @@ e.preventDefault()
     }, []); 
     const llenarCampos =(objeto)=>{
      setValor({...objeto})
+
+    }
+    const valorControlEmpleados = {
+      nombreEmpleado:"",
+      apellidoEmpleado:"",
+      cedulaEmpleado:"",
+      telefonoEmpleado:"",
+      correoEmpleado:"",
+      direccionEmpleado:"",
+      fechaEntrada:"",
+      checkEstadistica:false,
+      checkStock:false,
+      checkManeteminento:false,
+      checkVentas:false,
+      passowordEmpleados:"",
+    }
+    const [valorCE, setValorCE]=useState(valorControlEmpleados)
+    const onChangeControlEmpleados=(e)=>{
+      const {name, value}= e.target
+      setValorCE({...valorCE,[name]:value})
+    }
+    const submitControlEmpleado = (e)=>{
+      e.preventDefault()
+      auth.onAuthStateChanged(async user =>{
+        if(user!=null){
+          await db.collection("Empresas-Usuario").doc().set({correo:valorCE.correoEmpleado, contraseña:valorCE.passowordEmpleados,idEmpresa:user.uid })
+          await db.collection("Usuario").doc(user.uid).collection("Empleados-empresa").doc().set(valorCE)
+
+          setValor({...valorControlEmpleados})
+
+        }
+      })
     }
     return(
         <main>
@@ -143,7 +175,7 @@ e.preventDefault()
                         aria-label="scrollable force tabs example"
                     >
                         <Tab label="Control Actividades"  {...a11yProps(0)} />
-                        <Tab label="Control de Pedidos" {...a11yProps(1)} />
+                        <Tab label="Control de Empleados" {...a11yProps(1)} />
                         <Tab label="Agregar Pedidos a Proveedores"  {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
@@ -173,7 +205,67 @@ e.preventDefault()
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                    
+                    <div>
+                          <h1 className="admin-title">Control de empleados </h1>
+                          <div>
+                            <form className="form-empleado actividades" onSubmit={submitControlEmpleado} >
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Nombre de Empleados" variant="outlined" name="nombreEmpleado" onChange={onChangeControlEmpleados} value={valorCE.nombreEmpleado}  />
+                                  </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Apellido de Empleados" variant="outlined" name="apellidoEmpleado" onChange={onChangeControlEmpleados} value={valorCE.apellidoEmpleado} />
+                                  </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Cedula de Empleados" variant="outlined" name="cedulaEmpleado" onChange={onChangeControlEmpleados} value={valorCE.cedulaEmpleado}  />
+                                  </div>
+
+            
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Telefono de Empleado" variant="outlined" name="telefonoEmpleado" onChange={onChangeControlEmpleados} value={valorCE.telefonoEmpleado}  />
+                                  </div>
+                                  
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Direccion de Empleado" variant="outlined" name="direccionEmpleado" onChange={onChangeControlEmpleados} value={valorCE.direccionEmpleado} />
+                                  </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="date" name="fechaEntrada" onChange={onChangeControlEmpleados} value={valorCE.fechaEntrada} />
+                                  </div>
+                                  <hr></hr>
+                                  <h3>Permisos del empleado</h3>
+                                  <div>
+                                      <div >
+                                        <input onClick={()=>valorCE.checkEstadistica==true? valorCE.checkEstadistica=false : valorCE.checkEstadistica=true} type="checkbox"/>
+                                        <span>Estadistica</span>
+                                      </div>
+                                      <div>
+                                        <input onClick={()=>valorCE.checkStock==true? valorCE.checkStock=false : valorCE.checkStock=true} type="checkbox"/>
+                                        <span>Stock</span>
+                                      </div>
+                                      <div>
+                                        <input onClick={()=>valorCE.checkManeteminento==true? valorCE.checkManeteminento=false : valorCE.checkManeteminento=true}  type="checkbox"/>
+                                        <span>Mantenimiento</span>
+                                      </div>
+                                      <div>
+                                        <input onClick={()=>valorCE.checkVentas==true?valorCE.checkVentas=false :valorCE.checkVentas=true}  type="checkbox"/>
+                                        <span>Ventas  </span>
+                                      </div>
+
+                                  </div>
+                                  <hr></hr>
+                                  <h3>Datos para inicio de seccion</h3>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic" label="Correo de Empleado" variant="outlined" name="correoEmpleado" value={valorCE.correoEmpleado} onChange={onChangeControlEmpleados}  />
+                                  </div>
+                                  <div>
+                                    <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="password" name="passowordEmpleados" value={valorCE.passowordEmpleados} onChange={onChangeControlEmpleados} />
+                                  </div>
+                                  
+                                  
+                                 <div className="center-button"><button onClick={submitControlEmpleado}>Añadir empleado</button> </div>
+                                  
+                            </form>
+                          </div>
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
                         <div>

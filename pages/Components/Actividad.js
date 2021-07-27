@@ -1,7 +1,24 @@
 import { Divider } from "@material-ui/core";
+import {auth, db} from '../../BD/conf';
+import {useState, useEffect} from "react";
 const fecha =  new Date();
 const meses  = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 export default function Actividad(){
+    const [state, setState] = useState([])
+    useEffect(async ()=>{
+        auth.onAuthStateChanged(async user=>{
+            if(auth != null){
+                await db.collection('Usuario').doc(user.uid).collection('Actividades').onSnapshot(data=>{
+                    const DATOS = []
+                    data.forEach(d=>{
+                        DATOS.push({...d.data(),id:d.id})
+                    })
+                    setState(DATOS)
+                })
+    
+            }
+        })
+    },[])
     return(
         <article className="Actividades-main">
             <div>
@@ -11,30 +28,25 @@ export default function Actividad(){
             <br></br>
             <Divider/>
             <ul>
-                <li>
-                    <div>
-                        <h2>Titulo</h2>
-                        <span>Dia reunion: <time datetime="2018-07-07">22/15/2021</time></span>
-                        <p>Lorem pixel, formato </p>
-                    </div>
-                </li>
-                <Divider/>
-                <li>
-                    <div>
-                        <h2>Titulo</h2>
-                        <span>Dia reunion: <time datetime="2018-07-07">22/15/2021</time></span>
-                        <p>Lorem pixel, formato </p>
-                    </div>
-                </li>
-                <Divider/>
-                <li>
-                    <div>
-                        <h2>Titulo</h2>
-                        <span>Dia reunion: <time datetime="2018-07-07">22/15/2021</time></span>
-                        <p>Lorem pixel, formato </p>
-                    </div>
-                </li>
-                <Divider/>
+                {
+                   state.lenght === 0?
+                   <h1>No hay activdades</h1>:
+                   state.map(doc=>
+                    <>
+                    <li>
+                        <div>
+                            <h2>{doc.tituloActividad}</h2>
+                            <span>Dia reunion: <time datetime={doc.fechaActividad}>{doc.fechaActividad}</time></span>
+                            <br></br>
+                            <span>Hora: <time datetime={doc.horaActividad}>{doc.horaActividad}</time></span>
+                            <p>{doc.descripcionActividad} </p>
+                        </div>
+                    </li>
+                    <Divider/>
+                    </>    
+                )
+                }
+            
             </ul>
 
         </article>
