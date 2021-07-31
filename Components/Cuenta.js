@@ -1,6 +1,6 @@
 import Avatar from '@material-ui/core/Avatar';
 import {useState, useEffect} from 'react';
-import {auth, db} from '../../BD/conf';
+import {auth, db} from '../BD/conf';
 
 export default function Cuenta(){
     const [data, setData] = useState("")
@@ -19,5 +19,5 @@ export default function Cuenta(){
             <Avatar>{data.substring(0,1)}</Avatar>
             <span>{data}</span>
         </div>
-    )
+    ) 
 }

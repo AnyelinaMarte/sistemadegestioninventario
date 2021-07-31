@@ -1,5 +1,5 @@
-import FormCliente from '../Components/Forms/FormCliente';
-import ContainerForm from "../Components/Forms/ContainerForm";
+import FormCliente from '../../Components/Forms/FormCliente';
+import ContainerForm from "../../Components/Forms/ContainerForm";
 
 export default function PedidoProveedor(){
     
@@ -13,4 +13,4 @@ export default function PedidoProveedor(){
             
         </main>
     )
-}
+} 

@@ -1,7 +1,7 @@
 import { auth, db, dbSecondary } from "../BD/conf";
 import { useState, useEffect } from "react";
 import Modal from '@material-ui/core/Modal';
-import ModalListaEmpleados from "./Components/ModalListaEmpleados"
+import ModalListaEmpleados from "../Components/ModalListaEmpleados"
 export default function ListaEmpleados(){
     const [data, setData] = useState([])
     const [open, setOpen] = useState(false)
@@ -18,7 +18,7 @@ export default function ListaEmpleados(){
                 })
             }
         })
-    },[])
+    },[]) 
     const openModal = (id)=>{
         setIdEmpleado(id)
         setOpen(true)

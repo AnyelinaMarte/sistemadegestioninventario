@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import {db,auth} from '../../../BD/conf';
+import {db,auth} from '../../BD/conf';
 import Link from "next/link";
 import EditIcon from '@material-ui/icons/Edit';
 import {useState, useEffect} from 'react';
@@ -19,7 +19,7 @@ export default function FormProducto(props){
             docs.push(doc.data());
           });
           setGetProveedor(docs);
-        });
+        }); 
       }
     });
   };

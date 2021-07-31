@@ -16,8 +16,8 @@ import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import {useState, useEffect} from 'react';
-import {auth, db} from '../../BD/conf';
+import {useState, useEffect} from 'react'; 
+import {auth, db} from '../BD/conf';
 export default function Menu({children}) {
   const [data, setData] = useState("")
   const handleActive =()=>{

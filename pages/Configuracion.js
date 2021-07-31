@@ -12,7 +12,7 @@ export default function Configuracion(){
         direccion:'',
         nombre:'',
         correo:''
-    }
+    } 
     const [valor, setValor] = useState(valorActualizar);
     const handleChange =(e)=>{
         const {name, value}= e.target

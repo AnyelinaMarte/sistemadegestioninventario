@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {auth, db} from '../../BD/conf';
+import {auth, db} from '../BD/conf';
 export default function ModalCliente(props){
     const [data, setData] =useState({})
     const [TOTAL, setTOTAL] =useState(0)
@@ -16,7 +16,7 @@ export default function ModalCliente(props){
                })
             }
         })
-    },[])
+    },[]) 
     return(
        <div>
            {

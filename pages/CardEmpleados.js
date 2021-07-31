@@ -9,4 +9,4 @@ export default function CardEmpleados(props){
             <a>Ver mas</a>
         </article>
     )
-}
+} 

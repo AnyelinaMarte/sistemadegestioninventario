@@ -10,4 +10,4 @@ export default function CorreoVerificado(){
     return(
         <button onClick={verificar}>Confirmar Aqui</button>
     )
-}
+} 

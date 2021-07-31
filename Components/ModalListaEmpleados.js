@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { auth, db } from "../../BD/conf"
+import { auth, db } from "../BD/conf"
 
 export default function ModalListaEmpleados(props){
     const [data, setData] = useState({})
@@ -18,7 +18,7 @@ export default function ModalListaEmpleados(props){
             }
         })
     },[])
-    return(
+    return( 
         <main className="modalEmpleados-main" >
             <div className="data-main">
                 <div>

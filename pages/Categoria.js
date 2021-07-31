@@ -1,5 +1,5 @@
-import ContainerForm from "./Components/Forms/ContainerForm";
-import FormCategoria from "./Components/Forms/FormCategoria";
+import ContainerForm from "../Components/Forms/ContainerForm";
+import FormCategoria from "../Components/Forms/FormCategoria";
 import {auth,db} from "../BD/conf"
 import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
@@ -66,7 +66,7 @@ export default function Categoria(){
                             </tr>
                     </>
                     )}
-                </table>
+                </table> 
                         
                         
             </section>

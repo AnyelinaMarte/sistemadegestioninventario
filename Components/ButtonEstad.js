@@ -12,4 +12,4 @@ export default function ButtonEstad(props){
             </div>
         </article>
     )
-}
+} 
