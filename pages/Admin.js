@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {auth, db} from '../BD/conf';
+import ListaEmpleados from "./ListaEmpleados"
+import {auth, db, dbSecondary, authSecondary} from '../BD/conf';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     const [state, setState] = useState({
@@ -17,8 +18,8 @@ function TabPanel(props) {
       pedidos:false,
       estadisticas:false,
       stock:false
-    });
-    
+    }); 
+     
     return (
       <div
         role="tabpanel"
@@ -139,6 +140,8 @@ e.preventDefault()
       checkManeteminento:false,
       checkVentas:false,
       passowordEmpleados:"",
+      User_ID:""
+
     }
     const [valorCE, setValorCE]=useState(valorControlEmpleados)
     const onChangeControlEmpleados=(e)=>{
@@ -149,10 +152,13 @@ e.preventDefault()
       e.preventDefault()
       auth.onAuthStateChanged(async user =>{
         if(user!=null){
-          await db.collection("Empresas-Usuario").doc().set({correo:valorCE.correoEmpleado, contraseña:valorCE.passowordEmpleados,idEmpresa:user.uid })
-          await db.collection("Usuario").doc(user.uid).collection("Empleados-empresa").doc().set(valorCE)
+          authSecondary.createUserWithEmailAndPassword(valorCE.correoEmpleado, valorCE.passowordEmpleados).then(async data=>{
+            await dbSecondary.collection("Usuario").doc(data.user.uid).set({Empresa_ID:user.uid, checkVentas:valorCE.checkVentas,checkManeteminento:valorCE.checkManeteminento,checkStock:valorCE.checkStock, checkEstadistica:valorCE.checkEstadistica})
+            valorCE.User_ID = data.user.uid;
+            await db.collection("Usuario").doc(user.uid).collection("Empleados").doc().set(valorCE)
+            setValor({...valorControlEmpleados})
 
-          setValor({...valorControlEmpleados})
+          })
 
         }
       })
@@ -174,12 +180,17 @@ e.preventDefault()
                         textColor="primary"
                         aria-label="scrollable force tabs example"
                     >
-                        <Tab label="Control Actividades"  {...a11yProps(0)} />
-                        <Tab label="Control de Empleados" {...a11yProps(1)} />
-                        <Tab label="Agregar Pedidos a Proveedores"  {...a11yProps(2)} />
+                        <Tab label="Lista de Empleados" {...a11yProps(0)} />
+                        <Tab label="Agregar Empleados" {...a11yProps(1)} />
+                        <Tab label="Control Actividades"  {...a11yProps(2)} />
+                        <Tab label="Agregar Pedidos a Proveedores"  {...a11yProps(3)} />
                     </Tabs>
                 </AppBar>
+ 
                     <TabPanel value={value} index={0}>
+                      <ListaEmpleados />
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
                       <div>
                           <h1 className="admin-title">Actividades </h1>
                           <div>
@@ -267,7 +278,7 @@ e.preventDefault()
                           </div>
                         </div>
                     </TabPanel>
-                    <TabPanel value={value} index={2}>
+                    <TabPanel value={value} index={3}>
                         <div>
                           <h1 className="admin-title">Agregar Nuevo Pedido</h1>
                           <div>

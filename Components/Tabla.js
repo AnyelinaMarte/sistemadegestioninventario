@@ -14,7 +14,7 @@ export default function Tabla(props){
        <div>
            <form><input type="text" placeholder={`Buscar en ${props.tituloTabla}`}/></form>
        </div>
-        <table>
+        <table> 
                 <thead>
                         <tr className="titulos-table" >
                             {

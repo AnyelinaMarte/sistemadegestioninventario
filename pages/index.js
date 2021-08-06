@@ -1,9 +1,9 @@
 import Button from '@material-ui/core/Button';
 import Link from 'next/link';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
-import CardResult from './Components/CardResult';
-import Actividad from './Components/Actividad';
-import {GraficaVentaSemanal} from './Components/Graficas';
+import CardResult from '../Components/CardResult';
+import Actividad from '../Components/Actividad';
+import {GraficaVentaSemanal} from '../Components/Graficas';
 import {auth, db} from '../BD/conf';
 import {useState, useEffect} from 'react';
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   var totalMes=[]
   var [mesTotal, setmesTotal]=useState([])
   const ano= fecha.getFullYear() + ''
-  
+   
   useEffect(()=>{
     auth.onAuthStateChanged(async (user) => {
         if(user != null){

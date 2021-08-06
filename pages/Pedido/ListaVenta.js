@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react';
 import {auth, db} from '../../BD/conf';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import Modal from '@material-ui/core/Modal'; 
-import ModalCliente from '../Components/ModalCliente';
+import ModalCliente from '../../Components/ModalCliente';
 import Link from 'next/link';
-import Actividad from '../Components/Actividad';
+import Actividad from '../../Components/Actividad';
 
 export default function ListaVenta(){
     const [data, setData] = useState([])
@@ -20,7 +20,7 @@ export default function ListaVenta(){
                    console.log(dato)
                })
             }
-        })
+        }) 
     },[])
     const [open, setOpen] = useState(false);
     const [id, setID] = useState("");

@@ -1,5 +1,5 @@
-import ContainerForm from "./Components/Forms/ContainerForm";
-import FormProducto from "./Components/Forms/FormProducto";
+import ContainerForm from "../Components/Forms/ContainerForm";
+import FormProducto from "../Components/Forms/FormProducto";
 import {auth,db} from "../BD/conf"
 import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
@@ -11,7 +11,7 @@ export default function Productos(){
     const [datos,setDatos]=useState([])
     const addProducto=(objeto)=>{
         addBD(currentId,'Producto',objeto)
-    }
+    } 
     const deleteProducto=(id,Descripcion,categoriaP,proveedorP,precioC,precioV,cantidadE,salidaP,existencia)=>{
         deleteBD('Producto',id,{Descripcion,categoriaP,proveedorP,precioC,precioV,cantidadE,salidaP,existencia})
     }

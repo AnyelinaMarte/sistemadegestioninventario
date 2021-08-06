@@ -890,3 +890,74 @@ margin-right: auto;
 .actividades div{
  margin-bottom:5px;
 }
+.admin-control{
+  background-color: white;
+  border-radius: 15px;
+  width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+.grid-adim-control{
+  display:flex;
+  
+}
+.admin-control th{
+  padding: 18px;
+}
+.admin-control td{
+  padding: 18px;
+}
+.grid-adim-control div{
+  padding: 15px;
+  text-align: center;
+}
+.editar-adimn{
+  color:blue;
+  cursor:pointer;
+  font-weight: bold;
+}
+.modalEmpleados-main{
+  border-radius: 12px;
+  width: 600px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  background-color: white;
+}
+.data-main{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.data-main span{
+  display:flex;
+  padding-left: 5px;
+  font-weight: 100;
+}
+.data-main h3{
+  display: flex;
+}
+.button-modal-lista{
+  width: 200px;
+  margin-left: auto;
+}
+.button-modal-lista button{
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.329);
+  padding: 10px 15px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  border:none;
+  border-radius: 5px;
+}
+.button-modal-lista button:nth-child(1){
+  background-color: rgb(255, 47, 47);
+  color: white;
+}
+.button-modal-lista button:nth-child(2){
+  background-color: rgb(47, 85, 255);
+  color: white;
+}

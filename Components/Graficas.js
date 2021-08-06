@@ -1,5 +1,5 @@
 import { Bar } from 'react-chartjs-2';
-import {auth,db} from "../../BD/conf";
+import {auth,db} from "../BD/conf";
 import {useState, useEffect} from 'react';
 
 export function GraficaVentaSemanal(){
@@ -19,7 +19,7 @@ useEffect(()=>{
                       datoG.data().productosCliente.forEach(d=>{
                           total+= d.totalUnitario
                       })
-                  })
+                  }) 
                   totalMes.push(total)
               })
 

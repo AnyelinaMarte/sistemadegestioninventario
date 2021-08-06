@@ -1,5 +1,5 @@
-import ContainerForm from "./Components/Forms/ContainerForm";
-import FormProveedor from "./Components/Forms/FormProveedor";
+import ContainerForm from "../Components/Forms/ContainerForm";
+import FormProveedor from "../Components/Forms/FormProveedor";
 import {auth,db} from "../BD/conf"
 import {addBD, deleteBD} from '../BD/CRUD';
 import {useState, useEffect} from 'react';
@@ -10,7 +10,7 @@ export default function Proveedor(){
     const [currentId,setcurrentId]=useState('')
     const [datos,setDatos]=useState([])
     const addProveedor=(objeto)=>{
-        addBD(currentId,'Proveedor',objeto)
+        addBD(currentId,'Proveedor',objeto) 
     }
     const deleteProveedor=(id,nombre,correo,telefono,direccion)=>{
         deleteBD('Proveedor',id,{nombre,correo,telefono,direccion})

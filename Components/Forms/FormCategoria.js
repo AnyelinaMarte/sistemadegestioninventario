@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import {db,auth} from '../../../BD/conf';
+import {db,auth} from '../../BD/conf';
 import EditIcon from '@material-ui/icons/Edit';
 import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
@@ -11,7 +11,7 @@ export default function FormCategoria(props){
    }
    const [valor, setValor]= useState(valorInicial)
    const [dataCategoria, setdataCategoria]=useState([])
-   useEffect(()=>{
+   useEffect(()=>{ 
     auth.onAuthStateChanged(user=>{
         if (user!=null){
             db.collection('Usuario').doc(user.uid).collection('Categoria').onSnapshot(querySnapshot=>{

@@ -2,7 +2,7 @@ import { Bar, Pie, Line } from "react-chartjs-2";
 import Modal from "@material-ui/core/Modal";
 import { auth, db } from "../BD/conf";
 import { useState, useEffect } from "react";
-import ButtonEstad from "./Components/ButtonEstad";
+import ButtonEstad from "../Components/ButtonEstad";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import CallReceivedIcon from "@material-ui/icons/CallReceived";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
@@ -12,7 +12,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import CancelIcon from "@material-ui/icons/Cancel";
 export default function Estadisticas() {
   const valuesProductosMasVendidos = {
-    descripcionP1: "",
+    descripcionP1: "", 
     cantidadVP1: 0,
     descripcionP2: "",
     cantidadVP2: 0,

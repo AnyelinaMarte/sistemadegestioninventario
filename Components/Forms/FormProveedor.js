@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import {db,auth} from '../../../BD/conf';
+import {db,auth} from '../../BD/conf';
 import EditIcon from '@material-ui/icons/Edit';
 import swal from 'sweetalert';
 
@@ -15,7 +15,7 @@ export default function FormProveedor(props){
         direccionProveedor:'',
         cedulaProveedor:'',
         rncProveedor:'',
-       } 
+       }  
        const [valor, setValor]= useState(valorInicial)
        const CampoVacio = ()=>{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
     

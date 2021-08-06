@@ -18,7 +18,7 @@ export default function Login(){
             await auth.onAuthStateChanged(async User=>{
                 if (User != null){
             await db.collection('Usuario').doc(User.uid).collection('BD_Usuario').doc('datos_Usuario').set({nombreEmpresa, direccionEmpresa})}
-            })
+            }) 
         })
  
     }
