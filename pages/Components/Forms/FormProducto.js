@@ -46,7 +46,7 @@ export default function FormProducto(props){
     var fecha = new Date();
     const diaActual = fecha.getDate()
     const añoActual = fecha.getFullYear()
-    const mesActual = meses[fecha.getMonth()];
+    const mesActual = fecha.getMonth() + 1;
      const fechaActual = (`${diaActual}/${mesActual}/${añoActual}`)
 
     const valorInicial={

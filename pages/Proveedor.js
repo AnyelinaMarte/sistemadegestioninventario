@@ -30,12 +30,30 @@ export default function Proveedor(){
 
         
     },[])
+    const [buscarProeedor, setbuscarProeedor]= useState([])
+
+    const buscar=(e)=>{
+        let proveedores= e.target.value 
+        let cantidadletras=proveedores.length
+        
+       
+
+        let dproveedores= datos.filter(word=>{
+            const palabraProveedores=word.nombreProveedor
+            const palabraActual=palabraProveedores.substr(0,cantidadletras)
+            return palabraActual.toLowerCase() == proveedores.toLowerCase()
+        })
+        setbuscarProeedor(dproveedores)
+    }
     return(
         <main>
            <section className="form-table proveedor">
                     <ContainerForm>
                             <FormProveedor addProveedor={addProveedor} currentId={currentId}/>
                         </ContainerForm> 
+                        <hr></hr>
+                <input type="search" placeholder="Buscar en lista de Proveedores" name="buscarProveedor"  onChange={buscar}/>
+                <div className="scroll-tabla altoP">
                 <table>
                     <tr>
                     <th>
@@ -64,9 +82,37 @@ export default function Proveedor(){
                                 Eliminar
                             </th>
 
-
+ 
                     </tr>
-                    {datos.map(doc=>
+                    {buscarProeedor.length == 0?
+                        datos.map(doc=>
+                            <tr>
+                            <td>
+                                    {doc.rncProveedor}
+                                </td>
+                                <td>
+                                    {doc.nombreProveedor}
+                                </td>
+                                <td>
+                                    {doc.correoProveedor}
+                                </td>
+                                <td>
+                                    {doc.telefonoProveedor}
+                                </td>
+                                <td>
+                                    {doc.direccionProveedor}
+                                </td>
+                                <td>
+                                    {doc.cedulaProveedor}
+                                </td>
+                                <td>
+                                    <button onClick={()=>setcurrentId(doc.id)}><UpdateIcon color="primary"/></button>
+                                </td>
+                                <td>
+                                    <button onClick={()=>deleteProveedor(doc.id,doc.nombreProveedor,doc.correoProveedor,doc.telefonoProveedor,doc.direccionProveedor)}><DeleteIcon color="secondary"/></button>
+                                </td>
+                            </tr>
+                    ):buscarProeedor.map(doc=>
                             <tr>
                             <td>
                                     {doc.rncProveedor}
@@ -95,7 +141,7 @@ export default function Proveedor(){
                             </tr>
                     )}
                 </table>
-                        
+                 </div>       
                     
            </section> 
         </main>

@@ -281,6 +281,21 @@ body {
   border-radius: 20px;
   padding:20px;
   margin-bottom: 20px;
+  
+}
+input[type="search"]{
+  width: 25%; 
+  font-size:11.5px;
+  padding: 13px 18px 13px 18px;
+  border: 1px solid gray ;
+  border-radius: 15px;
+  margin-top: 10px;
+ 
+}
+
+input[type="search"]:hover{
+  border: 2px solid blueviolet ;
+
 }
 
 .form-añdir input{
@@ -299,7 +314,24 @@ body {
   font-weight: bold;
 }
 .categoria{
-  width:450px;
+  width:98%;
+  
+}
+.alto{
+  height:300px;
+
+}
+.altoP{
+  height:400px;
+
+}
+.altoPr{
+  height:450px;
+
+}
+.scroll-tabla{
+  overflow-y: scroll;
+
 }
 hr{
   width: 100%;
@@ -307,12 +339,19 @@ hr{
 
 .form-table th{
   color:#172B4D;
-  padding-right: 40px;
-  font-size: 18px;
+  font-size: 15px;
+  padding: 0px 13px 0px 13px;
+  width: 8%;
+  text-align: left;
+
 }
 .form-table tr{
   border: 1px solid #172B4D;
+  padding: 15px;
+ 
+
 }
+
 .form-table h2{
   color: #172B4D;
   text-transform: uppercase;
@@ -325,6 +364,13 @@ hr{
 .form-table td{
   font-size: 18px;
   padding: 13px;
+  margin: 5px;
+  width: 7.5%;
+ 
+  text-align: left;
+ 
+
+
 }
 .form-table td button{
   background: transparent;
@@ -335,7 +381,10 @@ hr{
   margin: 10px;
 }
 .proveedor{
-  width: 1050px;
+  width: 99%;
+}
+.producto{
+  width: 99%;
 }
 
 .form-producto input{

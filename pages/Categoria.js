@@ -29,12 +29,30 @@ export default function Categoria(){
 
         
     },[])
+   const [buscarCategoria, setbuscarCategoria]= useState([])
+
+    const buscar=(e)=>{
+        let categorias= e.target.value 
+        let cantidadletras=categorias.length
+        
+       
+
+        let dcategoria= datos.filter(word=>{
+            const palabraCategoria=word.descripcionCategoria
+            const palabraActual=palabraCategoria.substr(0,cantidadletras)
+            return palabraActual.toLowerCase() == categorias.toLowerCase()
+        })
+        setbuscarCategoria(dcategoria)
+    }
     return(
         <main>
             <section  className="form-table categoria"> 
                 <ContainerForm>
                     <FormCategoria addCategoria={addCategoria} currentId={currentId}/>
                 </ContainerForm> 
+                <hr></hr>
+                <input type="search"  placeholder="Buscar en lista de Categorias" name="buscarCategoria"  onChange={buscar}/>
+                <div className="scroll-tabla alto">
 
                 <table>
                     <tr>
@@ -51,7 +69,22 @@ export default function Categoria(){
 
                     </tr>
                     
-                    {datos.map(doc=>
+                    {buscarCategoria.length == 0?
+                    datos.map(doc=>
+                    <>
+                            <tr>
+                                <td>
+                                    {doc.descripcionCategoria}
+                                </td>
+                                <td>
+                                    <button onClick={()=>setcurrentId(doc.id)}><UpdateIcon color="primary"/></button>
+                                </td>
+                                <td>
+                                    <button onClick={()=>deleteCategoria(doc.id,doc.descripcionCategoria)}><DeleteIcon color="secondary"/></button>
+                                </td>
+                            </tr>
+                    </>
+                    ):buscarCategoria.map(doc=>
                     <>
                             <tr>
                                 <td>
@@ -68,7 +101,7 @@ export default function Categoria(){
                     )}
                 </table>
                         
-                        
+                </div>       
             </section>
         </main>
     )
