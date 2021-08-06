@@ -770,9 +770,8 @@ background-color: white;
 color: black;
 border: 2px solid red;
 text-align: right;
-padding: 0px;
-margin: 0px;
-margin-top: 0px;
+padding: 0px 0px 10px 0px;
+margin: 0px 25px 150px 540px;
 width: 27px;
 height: 27px;
 

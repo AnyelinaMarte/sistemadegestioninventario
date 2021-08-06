@@ -21,13 +21,24 @@ export default function Login(){
             }) 
         })
  
-    }
+    } 
     const datosInicio=(e)=>{
         e.preventDefault()
         const correoUsuario= document.getElementById('correoInicio').value;
         const claveUsuario= document.getElementById('claveInicio').value;
 
-        auth.signInWithEmailAndPassword(correoUsuario, claveUsuario)
+        auth.signInWithEmailAndPassword(correoUsuario, claveUsuario).then(log=>{
+            
+        }).catch(error =>{
+        
+               
+                swal("Algo Salio Mal", "Datos Erroneos", "error");
+    
+                
+           
+                console.log(error.message)
+            
+        })
 
 
     }

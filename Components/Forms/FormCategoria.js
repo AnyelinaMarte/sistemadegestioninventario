@@ -44,7 +44,7 @@ export default function FormCategoria(props){
             } else{swal("Campo existente", "No se pueden agregar dos campos con el mismo nombre", "info");
         }    
         }else{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
-   }
+   } 
    
    const getData=(id)=>{
        auth.onAuthStateChanged(async user=>{
