@@ -55,7 +55,7 @@ export default function ListaEmpleados(){
                                 <td>{d.telefonoEmpleado}</td>
                                 <td>{d.direccionEmpleado}</td>
                                 <td onClick={()=>openModal(d.id)} className="editar-adimn">Ver</td>
-                                <td onClick={()=>openModalEditar(d.id)} className="editar-adimn">Editar</td>
+                                {/*<td onClick={()=>openModalEditar(d.id)} className="editar-adimn">Editar</td>*/}
                             </tr>
                         )}
                 </table>

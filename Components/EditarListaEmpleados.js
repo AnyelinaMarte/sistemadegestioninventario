@@ -32,15 +32,15 @@ export default function EditarListaEmpleados(props){
         checkStock:data.checkStock,
         checkManeteminento:data.checkManeteminento,
         checkVentas:"   ",
-        passowordEmpleados:data.passowordEmpleados,
+        passowordEmpleados:"",
         User_ID:data.User_ID
       }
     const [valorCE, setValorCE]=useState(valorControlEmpleados)
     const onChangeControlEmpleados=(e)=>{
-        const {name, value}= e.target
-        setValorCE({...valorCE,[name]:value})
-        console.log(valorCE)
-      }
+        const {name, value}= e.target;   
+        setValorCE({...valorCE,[name]:value});
+       
+   }
     const submitControlEmpleado = (e)=>{
         e.preventDefault()
         auth.onAuthStateChanged(async user =>{
@@ -79,44 +79,44 @@ export default function EditarListaEmpleados(props){
         <form onSubmit={submitControlEmpleado} className="modalEmpleados-main editar-listaempleados" >
             <div className="data-main">
                 <div>
-                    <h3>Nombre: <span><input name="nombreEmpleado" placeholder={data.nombreEmpleado}/></span></h3>
-                    <h3>Apellido:<span><input name="apellidoEmpleado" placeholder={data.apellidoEmpleado}/> </span></h3>
+                    <h3>Nombre: <span><input name="nombreEmpleado" placeholder={data.nombreEmpleado} onChange={onChangeControlEmpleados}/></span></h3>
+                    <h3>Apellido:<span><input name="apellidoEmpleado" placeholder={data.apellidoEmpleado} onChange={onChangeControlEmpleados} /> </span></h3>
                 </div>
                 <div>
-                    <h3>Telefono: <span><input name="telefonoEmpleado" placeholder={data.telefonoEmpleado}/></span></h3>
+                    <h3>Telefono: <span><input name="telefonoEmpleado" placeholder={data.telefonoEmpleado} onChange={onChangeControlEmpleados} /></span></h3>
                 </div>
                 <div>
-                    <h3>Direccion:<span> <input name="direccionEmpleado" placeholder={data.direccionEmpleado}/> </span></h3>
-                    <h3>Fecha entrada: <span> <input name="fechaEntrada" placeholder={data.fechaEntrada}/> </span></h3>
+                    <h3>Direccion:<span> <input name="direccionEmpleado" placeholder={data.direccionEmpleado} onChange={onChangeControlEmpleados}/> </span></h3>
+                    <h3>Fecha entrada: <span> <input name="fechaEntrada" placeholder={data.fechaEntrada} onChange={onChangeControlEmpleados} /> </span></h3>
                 </div>
                 <div>
-                    <h3>Cedula: <span><input name="cedulaEmpleado" placeholder={data.cedulaEmpleado}/></span></h3>
+                    <h3>Cedula: <span><input name="cedulaEmpleado" placeholder={data.cedulaEmpleado} onChange={onChangeControlEmpleados} /></span></h3>
                 </div>
 
             </div>
             
             <h3>Permisos del empleado</h3>
             <div>
-                <div >
-                    <input onClick={()=>valorCE.checkEstadistica==true? valorCE.checkEstadistica=false : valorCE.checkEstadistica=true} type="checkbox"/>
+                <div  >
+                    <input onChange={onChangeControlEmpleados} onClick={()=>valorCE.checkEstadistica==true? valorCE.checkEstadistica=false : valorCE.checkEstadistica=true} type="checkbox"/>
                     <span>Estadistica</span>
                 </div>
                 <div>
-                    <input onClick={()=>valorCE.checkStock==true? valorCE.checkStock=false : valorCE.checkStock=true} type="checkbox"/>
+                    <input onChange={onChangeControlEmpleados} onClick={()=>valorCE.checkStock==true? valorCE.checkStock=false : valorCE.checkStock=true} type="checkbox"/>
                     <span>Stock</span>
                 </div>
                 <div>
-                    <input onClick={()=>valorCE.checkManeteminento==true? valorCE.checkManeteminento=false : valorCE.checkManeteminento=true}  type="checkbox"/>
+                    <input onChange={onChangeControlEmpleados} onClick={()=>valorCE.checkManeteminento==true? valorCE.checkManeteminento=false : valorCE.checkManeteminento=true}  type="checkbox"/>
                     <span>Mantenimiento</span>
                 </div>
             </div>
             <hr></hr>
             <h3>Datos para inicio de seccion</h3>
             <div>
-                <TextField style={{width:'100%'}} id="outlined-basic" label="Correo de Empleado" variant="outlined" name="correoEmpleado" value={valorCE.correoEmpleado} onChange={onChangeControlEmpleados}  />
+                <TextField style={{width:'100%'}} onChange={onChangeControlEmpleados} id="outlined-basic" label="Correo de Empleado" variant="outlined" name="correoEmpleado" value={valorCE.correoEmpleado} onChange={onChangeControlEmpleados}  />
             </div>
             <div>
-                <TextField style={{width:'100%'}} id="outlined-basic"  variant="outlined" type="password" name="passowordEmpleados" value={valorCE.passowordEmpleados} onChange={onChangeControlEmpleados} />
+                <TextField style={{width:'100%'}} onChange={onChangeControlEmpleados} id="outlined-basic"  variant="outlined" type="password" name="passowordEmpleados" value={valorCE.passowordEmpleados} onChange={onChangeControlEmpleados} />
             </div>
             
             <div className="button-modal-lista">
