@@ -44,7 +44,7 @@ export default function FormCategoria(props){
             } else{swal("Campo existente", "No se pueden agregar dos campos con el mismo nombre", "info");
         }    
         }else{swal("No se admiten campos Vacios", "No se permite dejar campos vacios", "info") }
-   }
+   } 
    
    const getData=(id)=>{
        auth.onAuthStateChanged(async user=>{
@@ -61,13 +61,13 @@ export default function FormCategoria(props){
         }
         else{
             setValor({...valorInicial})
-        }
+        } 
    },[props.currentId])
     return(
         <form onSubmit={handleSubmit} className="form-añdir">
             {props.currentId == ''?<h2>Registrar Categoria</h2>:<h2>Actualizar Categoria</h2>  } 
             <div>
-                <input onChange={handleChange} value={valor.descripcionCategoria} type="text" placeholder="Registra una categoria" name="descripcionCategoria"/>
+                <input onChange={handleChange} value={valor.descripcionCategoria} type="text" placeholder="Descripcion de la categoria" name="descripcionCategoria"/>
             </div>
             <div className="botton-añadir">
                 <Button onClick={handleSubmit} variant="contained" style={{background:'blueviolet', fontWeight:'bold', color:'white', marginTop:'20px', borderRadius:'70px'}}>

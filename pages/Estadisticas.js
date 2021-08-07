@@ -329,18 +329,7 @@ export default function Estadisticas() {
     setOpen4(false);
   };
 
-  // const pdfprodusctosmasventidos=(idtabla,nombre)=>{
-  // const pdfpmasv =  new jsPDF()
-  // pdfpmasv.text("Hola",1,1)
-
-  // pdfpmasv.autoTable({
-  //     startY:50,
-  //     html:idtabla ,
-
-  //   })
-
-  //   pdfpmasv.save(`${nombre}.pdf`)
-  // }
+  
   return (
     <>
       <h1 className="title-estadistica">Estadisticas</h1>
@@ -409,9 +398,7 @@ export default function Estadisticas() {
         <>
           <div className="grid-informe">
             <div className="botones-informe">
-              <button className="btn-descargar">
-                <GetAppIcon />
-              </button>
+             
               <button className="btn-cerrar" onClick={handleClose}>
                 <CancelIcon />
               </button>
@@ -487,9 +474,7 @@ export default function Estadisticas() {
         <>
           <div className="grid-informe">
             <div className="botones-informe">
-              <button className="btn-descargar">
-                <GetAppIcon />
-              </button>
+              
               <button className="btn-cerrar" onClick={handleClose1}>
                 <CancelIcon />
               </button>
@@ -567,9 +552,7 @@ export default function Estadisticas() {
         <>
           <div className="grid-informe">
             <div className="botones-informe">
-              <button className="btn-descargar">
-                <GetAppIcon />
-              </button>
+              
               <button className="btn-cerrar" onClick={handleClose2}>
                 <CancelIcon />
               </button>
@@ -618,9 +601,7 @@ export default function Estadisticas() {
         <>
           <div className="grid-informe">
             <div className="botones-informe">
-              <button className="btn-descargar">
-                <GetAppIcon />
-              </button>
+             
               <button className="btn-cerrar" onClick={handleClose3}>
                 <CancelIcon />
               </button>
@@ -671,9 +652,7 @@ export default function Estadisticas() {
         <>
           <div className="grid-informe">
             <div className="botones-informe">
-              <button className="btn-descargar">
-                <GetAppIcon />
-              </button>
+             
               <button className="btn-cerrar" onClick={handleClose4}>
                 <CancelIcon />
               </button>
