@@ -1,10 +1,12 @@
 import { auth, db, dbSecondary } from "../BD/conf";
 import { useState, useEffect } from "react";
 import Modal from '@material-ui/core/Modal';
-import ModalListaEmpleados from "../Components/ModalListaEmpleados"
+import ModalListaEmpleados from "../Components/ModalListaEmpleados";
+import EditarListaEmpleados from "../Components/EditarListaEmpleados"
 export default function ListaEmpleados(){
     const [data, setData] = useState([])
     const [open, setOpen] = useState(false)
+    const [openEditar, setOpenEditar] = useState(false)
     const [idEmpleado, setIdEmpleado] = useState(false)
     useEffect(()=>{
         auth.onAuthStateChanged(async user=>{
@@ -26,6 +28,13 @@ export default function ListaEmpleados(){
     const closeModal = ()=>{
         setOpen(false)
     }
+    const openModalEditar = (id)=>{
+        setIdEmpleado(id)
+        setOpenEditar(true)
+    }
+    const closeModalEditar = ()=>{
+        setOpenEditar(false)
+    }
     return(
         <>
         <div className="admin-control" >
@@ -45,7 +54,8 @@ export default function ListaEmpleados(){
                                 <td>{d.apellidoEmpleado}</td>
                                 <td>{d.telefonoEmpleado}</td>
                                 <td>{d.direccionEmpleado}</td>
-                                <td onClick={()=>openModal(d.id)} className="editar-adimn">Ver y Editar</td>
+                                <td onClick={()=>openModal(d.id)} className="editar-adimn">Ver</td>
+                                <td onClick={()=>openModalEditar(d.id)} className="editar-adimn">Editar</td>
                             </tr>
                         )}
                 </table>
@@ -58,7 +68,17 @@ export default function ListaEmpleados(){
             aria-describedby="simple-modal-description"
         >
             <div className="main-lista-empleados">
-                <ModalListaEmpleados id={idEmpleado}/>
+                <ModalListaEmpleados close={closeModal} id={idEmpleado}/>
+            </div>
+        </Modal>
+        <Modal
+            open={openEditar}
+            onClose={closeModalEditar}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+        >
+            <div className="main-lista-empleados">
+                <EditarListaEmpleados close={closeModalEditar} id={idEmpleado}/>
             </div>
         </Modal>
         </>

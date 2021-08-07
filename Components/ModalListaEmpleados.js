@@ -47,8 +47,8 @@ export default function ModalListaEmpleados(props){
                 </ol>
             </div>
             <div className="button-modal-lista">
-                <button>Cerrar</button>
-                <button>Editar</button>
+                <button onClick={props.close} >Cerrar</button>
+               
             </div>
         </main>
     )

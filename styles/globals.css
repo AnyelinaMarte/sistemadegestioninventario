@@ -878,6 +878,10 @@ margin-right: auto;
   margin-top: 30px;
   background-color: white;
 }
+.editar-listaempleados{
+  margin-top: 4px;
+
+}
 .data-main{
 
   display: grid;
